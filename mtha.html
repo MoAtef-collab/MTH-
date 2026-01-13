@@ -1,0 +1,795 @@
+﻿
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أكاديمية مستشفى المطرية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background-color: #FBFBFE;
+            text-align: right;
+        }
+        .bg-mth-gold { background-color: #C5A021; }
+        .text-mth-gold { color: #C5A021; }
+        .bg-mth-purple { background-color: #6D28D9; }
+        .bg-mth-green { background-color: #2D8B44; }
+        
+        /* تأثيرات حركية محسّنة */
+        .fade-in { animation: fadeIn 0.6s ease-in-out; }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        .slide-in-left { animation: slideInLeft 0.5s ease-out; }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .slide-in-right { animation: slideInRight 0.5s ease-out; }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .scale-in { animation: scaleIn 0.4s ease-out; }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .bounce-in { animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse-slow { animation: pulseSlow 2s ease-in-out infinite; }
+        @keyframes pulseSlow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .hidden-section { display: none; }
+        
+        /* تحسينات RTL */
+        input[type="number"], input[type="text"], select {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+        
+        .fa-arrow-right { transform: scaleX(-1); }
+        
+        /* رسائل الخطأ المحسّنة */
+        .error-message {
+            background-color: #FEE2E2;
+            border: 1px solid #EF4444;
+            color: #991B1B;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+            animation: shake 0.3s ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+        }
+        
+        input.error, select.error {
+            border-color: #EF4444 !important;
+            background-color: #FEF2F2 !important;
+        }
+        
+        /* تأثيرات البطاقات */
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* تحسين الفيديو */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* تأثير البروتوكول */
+        .protocol-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .protocol-card:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .protocol-expanded {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        
+        .protocol-expanded.active {
+            max-height: 1000px;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50 slide-in-left">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button id="backBtn" onclick="goHome()" class="hidden p-2 rounded-full hover:bg-gray-100 text-gray-600 transition-all" aria-label="العودة للصفحة الرئيسية">
+                    <i class="fas fa-arrow-right text-xl"></i>
+                </button>
+                <img src="https://i.postimg.cc/8k7Gv3qN/lwjw-almstshfy-bdwn-khlfyt.png" alt="شعار مستشفى المطرية التعليمي" class="h-12 w-auto object-contain">
+                <div class="hidden sm:flex flex-col">
+                    <h1 class="text-xl font-bold text-gray-900">مستشفى المطرية التعليمي</h1>
+                    <span class="text-xs text-mth-gold font-bold tracking-wider uppercase">بوابة التعليم الطبي</span>
+                </div>
+            </div>
+            <button class="px-4 py-2 rounded-lg bg-gray-50 text-gray-700 font-medium border border-gray-200 hover:bg-gray-100 transition-all" aria-label="تغيير اللغة إلى الإنجليزية">
+                <i class="fas fa-globe ml-2"></i> English
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 w-full py-8">
+        
+        <div id="homeSection" class="fade-in space-y-10 text-center">
+            <section class="space-y-4 pt-8">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-yellow-50 text-mth-gold font-bold text-xs border border-yellow-200 bounce-in">
+                    التميز في التعليم الطبي
+                </div>
+                <h2 class="text-3xl md:text-5xl font-black text-gray-900 leading-tight scale-in">أكاديمية مستشفى المطرية</h2>
+                <p class="max-w-2xl mx-auto text-gray-500 text-lg font-medium fade-in">
+                    المنصة الرقمية الموحدة للتدريب والتعليم المستمر لجميع الكوادر الطبية.
+                </p>
+            </section>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8">
+                <button onclick="showSection('cabinetsSection')" class="bg-white p-8 rounded-[2.5rem] shadow-xl border-2 border-gray-50 flex flex-col items-center gap-6 group card-hover" role="button" aria-label="الانتقال إلى دواليب الطوارئ">
+                    <div class="w-24 h-24 rounded-3xl bg-mth-gold flex items-center justify-center text-4xl text-white shadow-lg group-hover:scale-110 transition-transform pulse-slow">
+                        <i class="fas fa-briefcase-medical"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-black block text-gray-800 text-mth-gold">دواليب الطوارئ</span>
+                        <span class="text-sm text-gray-500 block mt-2">دواليب تفاعلية + فيديو تعليمي</span>
+                    </div>
+                </button>
+
+                <button onclick="showSection('calculatorSection')" class="bg-white p-8 rounded-[2.5rem] shadow-xl border-2 border-gray-50 flex flex-col items-center gap-6 group card-hover" role="button" aria-label="الانتقال إلى حاسبة الجرعات">
+                    <div class="w-24 h-24 rounded-3xl bg-mth-purple flex items-center justify-center text-4xl text-white shadow-lg group-hover:scale-110 transition-transform pulse-slow">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-black block text-gray-800 text-purple-700">حاسبة الجرعات</span>
+                        <span class="text-sm text-gray-500 block mt-2">حساب دقيق بمعادلات محدثة</span>
+                    </div>
+                </button>
+
+                <button onclick="showSection('protocolsSection')" class="bg-white p-8 rounded-[2.5rem] shadow-xl border-2 border-gray-50 flex flex-col items-center gap-6 group card-hover" role="button" aria-label="الانتقال إلى البروتوكولات الطبية">
+                    <div class="w-24 h-24 rounded-3xl bg-mth-green flex items-center justify-center text-4xl text-white shadow-lg group-hover:scale-110 transition-transform pulse-slow">
+                        <i class="fas fa-scroll"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-black block text-gray-800 text-green-700">البروتوكولات</span>
+                        <span class="text-sm text-gray-500 block mt-2">أحدث البروتوكولات 2026</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <div id="calculatorSection" class="hidden-section">
+            <div class="bg-white rounded-[2rem] shadow-2xl overflow-hidden border-2 border-purple-100 max-w-4xl mx-auto flex flex-col md:flex-row scale-in">
+                <div class="p-8 w-full md:w-3/5 space-y-6">
+                    <h2 class="text-2xl font-black text-gray-900 flex items-center gap-2">
+                        <i class="fas fa-calculator text-purple-600"></i> حاسبة الجرعات المحسّنة
+                    </h2>
+                    
+                    <div id="generalError" class="error-message"></div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">الوزن (كجم) <span class="text-red-500">*</span></label>
+                            <input type="number" id="weightInput" min="0.5" max="500" step="0.1" 
+                                   class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 font-bold transition-all" 
+                                   placeholder="0" 
+                                   aria-label="أدخل الوزن بالكيلوجرام"
+                                   oninput="clearError('weightInput')">
+                            <div id="weightError" class="error-message"></div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">العمر (سنة) <span class="text-red-500">*</span></label>
+                            <input type="number" id="ageInput" min="0" max="120" step="1"
+                                   class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 font-bold transition-all" 
+                                   placeholder="0"
+                                   aria-label="أدخل العمر بالسنوات"
+                                   oninput="clearError('ageInput')">
+                            <div id="ageError" class="error-message"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">اسم المضاد الحيوي <span class="text-red-500">*</span></label>
+                        <select id="antibioticSelect" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 font-bold transition-all" onchange="clearError('antibioticSelect')">
+                            <option value="">-- اختر المضاد الحيوي --</option>
+                            <option value="Amoxicillin">Amoxicillin</option>
+                            <option value="Amoxicillin/Clavulanate">Amoxicillin/Clavulanate (Augmentin)</option>
+                            <option value="Ceftriaxone">Ceftriaxone</option>
+                            <option value="Azithromycin">Azithromycin</option>
+                            <option value="Levofloxacin">Levofloxacin</option>
+                            <option value="Meropenem">Meropenem</option>
+                            <option value="Vancomycin">Vancomycin</option>
+                            <option value="Piperacillin/Tazobactam">Piperacillin/Tazobactam</option>
+                        </select>
+                        <div id="antibioticSelectError" class="error-message"></div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="block text-sm font-bold text-gray-700">وظائف الأعضاء</label>
+                        <label class="flex items-center gap-2 p-3 border rounded-xl cursor-pointer hover:bg-gray-50 transition-all">
+                            <input type="checkbox" id="renalCheck" class="w-5 h-5 accent-red-500">
+                            <span class="font-semibold text-gray-600">قصور وظائف الكلى</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-3 border rounded-xl cursor-pointer hover:bg-gray-50 transition-all">
+                            <input type="checkbox" id="liverCheck" class="w-5 h-5 accent-red-500">
+                            <span class="font-semibold text-gray-600">قصور وظائف الكبد</span>
+                        </label>
+                    </div>
+
+                    <button onclick="calculateDose()" class="w-full bg-mth-purple text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-purple-800 transition-all hover:scale-105" aria-label="احسب الجرعة">
+                        <i class="fas fa-calculator ml-2"></i> احسب الجرعة الآن
+                    </button>
+                    
+                    <p class="text-xs text-gray-400 text-center">
+                        <i class="fas fa-info-circle"></i> هذه الحاسبة للإرشاد فقط. يجب استشارة الطبيب المختص.
+                    </p>
+                </div>
+
+                <div class="w-full md:w-2/5 bg-gray-50 p-8 flex flex-col justify-center items-center text-center border-r border-gray-100">
+                    <div id="resultPlaceholder" class="opacity-50">
+                        <i class="fas fa-search text-6xl text-gray-300 mb-4 pulse-slow"></i>
+                        <p class="font-bold text-gray-400">أدخل البيانات للبدء</p>
+                    </div>
+                    <div id="resultContent" class="hidden w-full space-y-4">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 bounce-in">
+                            <h3 class="text-xl font-black text-gray-900" id="resAntibiotic">...</h3>
+                            <p class="text-sm text-gray-500 mt-1">الجرعة المقترحة:</p>
+                        </div>
+                        <div class="bg-purple-100 p-4 rounded-xl text-purple-800 font-black text-2xl scale-in" id="resDose">
+                            0 مجم/يوم
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded-lg text-blue-700 text-sm font-bold border border-blue-100 slide-in-right" id="resFrequency">
+                            <i class="fas fa-clock"></i> الجرعات: <span id="frequencyText">مرة واحدة يومياً</span>
+                        </div>
+                        <div id="resAgeGroup" class="bg-indigo-50 p-3 rounded-lg text-indigo-700 text-sm font-bold border border-indigo-100 slide-in-left">
+                            <i class="fas fa-user"></i> الفئة العمرية: <span id="ageGroupText">بالغ</span>
+                        </div>
+                        <div id="resWarning" class="hidden bg-red-50 p-3 rounded-lg text-red-600 text-sm font-bold border border-red-100">
+                            <i class="fas fa-exclamation-triangle"></i> <span id="warningText">تنبيه</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-4">?? نتيجة استرشادية - استشر الطبيب المختص</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="cabinetsSection" class="hidden-section">
+            <div class="text-center mb-10 scale-in">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">دواليب الطوارئ</h2>
+                <p class="text-gray-500">محتويات دواليب الطوارئ + فيديو تعليمي</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div class="p-6 bg-orange-50 rounded-2xl border-2 border-orange-200 card-hover">
+                        <i class="fas fa-fire text-4xl text-orange-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-3">دولاب الحروق</h3>
+                        <div class="text-right space-y-2 text-gray-700">
+                            <p><i class="fas fa-check text-orange-500 ml-2"></i> شاش معقم</p>
+                            <p><i class="fas fa-check text-orange-500 ml-2"></i> فازلين طبي</p>
+                            <p><i class="fas fa-check text-orange-500 ml-2"></i> مراهم الحروق (Silver Sulfadiazine)</p>
+                            <p><i class="fas fa-check text-orange-500 ml-2"></i> ضمادات غير لاصقة</p>
+                            <p><i class="fas fa-check text-orange-500 ml-2"></i> محلول ملحي</p>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 bg-red-50 rounded-2xl border-2 border-red-200 card-hover">
+                        <i class="fas fa-heartbeat text-4xl text-red-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-3">دولاب الطوارئ (ER)</h3>
+                        <div class="text-right space-y-2 text-gray-700">
+                            <p><i class="fas fa-check text-red-500 ml-2"></i> Epinephrine</p>
+                            <p><i class="fas fa-check text-red-500 ml-2"></i> Atropine</p>
+                            <p><i class="fas fa-check text-red-500 ml-2"></i> Amiodarone</p>
+                            <p><i class="fas fa-check text-red-500 ml-2"></i> Naloxone</p>
+                            <p><i class="fas fa-check text-red-500 ml-2"></i> Dextrose 50%</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bounce-in">
+                    <div class="bg-white p-6 rounded-2xl shadow-xl border-2 border-gray-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i class="fas fa-video text-3xl text-red-600"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900">فيديو تعليمي: دولاب الحروق</h3>
+                                <p class="text-sm text-gray-500">شرح تفصيلي لمحتويات وطريقة الاستخدام</p>
+                            </div>
+                        </div>
+                        <div class="video-container">
+                            <iframe src="https://drive.google.com/file/d/1E2YYiG68zHqS_3jHUoPMc0QsYvV-8mph/preview" allow="autoplay"></iframe>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between text-sm text-gray-500">
+                            <span><i class="fas fa-play-circle ml-1"></i> شاهد الآن</span>
+                            <span><i class="fas fa-info-circle ml-1"></i> مدة الفيديو: متغيرة</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="protocolsSection" class="hidden-section">
+            <div class="text-center mb-10 scale-in">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">البروتوكولات الطبية</h2>
+                <p class="text-gray-500">أحدث البروتوكولات العلاجية للالتهابات الرئوية (2026)</p>
+            </div>
+            
+            <div class="space-y-6 max-w-5xl mx-auto">
+                <!-- CAP Protocol -->
+                <div class="bg-white rounded-2xl border-2 border-blue-100 shadow-lg overflow-hidden protocol-card" onclick="toggleProtocol('cap')">
+                    <div class="p-6 cursor-pointer">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-lungs text-blue-600 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-black text-blue-600">CAP</h3>
+                                    <p class="text-gray-600 font-semibold">Community-Acquired Pneumonia</p>
+                                    <p class="text-sm text-gray-500">الالتهاب الرئوي المكتسب من المجتمع</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-xl transition-transform" id="cap-icon"></i>
+                        </div>
+                    </div>
+                    <div id="cap-content" class="protocol-expanded px-6 pb-6">
+                        <div class="bg-blue-50 p-5 rounded-xl space-y-4 text-right">
+                            <div class="border-r-4 border-blue-500 pr-4">
+                                <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-user-injured ml-2"></i>المرضى غير الحادين (Non-severe):</h4>
+                                <p class="text-gray-700 leading-relaxed">
+                                    • <strong>العلاج الأول:</strong> Beta-lactam (Amoxicillin/Clavulanate 1g ثلاث مرات يومياً) + Macrolide (Azithromycin 500mg مرة يومياً)<br>
+                                    • <strong>البديل:</strong> Respiratory Fluoroquinolone (Levofloxacin 750mg مرة يومياً)<br>
+                                    • <strong>المدة:</strong> 5-7 أيام حتى استقرار الحالة
+                                </p>
+                            </div>
+                            <div class="border-r-4 border-red-500 pr-4">
+                                <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-procedures ml-2"></i>المرضى الحادين (Severe ICU):</h4>
+                                <p class="text-gray-700 leading-relaxed">
+                                    • <strong>العلاج:</strong> Beta-lactam (Ceftriaxone 2g مرة يومياً) + Macrolide أو Fluoroquinolone<br>
+                                    • <strong>إضافة تغطية MRSA:</strong> إذا كان هناك عزل سابق أو عوامل خطر<br>
+                                    • <strong>المدة:</strong> 7-10 أيام
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HAP Protocol -->
+                <div class="bg-white rounded-2xl border-2 border-purple-100 shadow-lg overflow-hidden protocol-card" onclick="toggleProtocol('hap')">
+                    <div class="p-6 cursor-pointer">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-hospital text-purple-600 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-black text-purple-600">HAP</h3>
+                                    <p class="text-gray-600 font-semibold">Hospital-Acquired Pneumonia</p>
+                                    <p class="text-sm text-gray-500">الالتهاب الرئوي المكتسب من المستشفى</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-xl transition-transform" id="hap-icon"></i>
+                        </div>
+                    </div>
+                    <div id="hap-content" class="protocol-expanded px-6 pb-6">
+                        <div class="bg-purple-50 p-5 rounded-xl space-y-4 text-right">
+                            <div class="border-r-4 border-purple-500 pr-4">
+                                <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-capsules ml-2"></i>العلاج التجريبي:</h4>
+                                <p class="text-gray-700 leading-relaxed">
+                                    • <strong>خط أول:</strong> Antipseudomonal Beta-lactam:<br>
+                                    - Piperacillin/Tazobactam 4.5g كل 6 ساعات<br>
+                                    - Cefepime 2g كل 8 ساعات<br>
+                                    - Meropenem 1g كل 8 ساعات<br>
+                                    • <strong>+ تغطية MRSA:</strong> Vancomycin (15-20 mg/kg كل 8-12 ساعة) أو Linezolid 600mg كل 12 ساعة
+                                </p>
+                            </div>
+                            <div class="border-r-4 border-orange-500 pr-4">
+                                <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-clock ml-2"></i>المدة:</h4>
+                                <p class="text-gray-700 leading-relaxed">
+                                    • <strong>7 أيام</strong> للحالات غير المعقدة مع استجابة جيدة<br>
+                                    • قد تمتد لـ 14 يوم في حالات معينة
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VAP Protocol -->
+                <div class="bg-white rounded-2xl border-2 border-green-100 shadow-lg overflow-hidden protocol-card" onclick="toggleProtocol('vap')">
+                    <div class="p-6 cursor-pointer">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-wind text-green-600 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-black text-green-600">VAP</h3>
+                                    <p class="text-gray-600 font-semibold">Ventilator-Associated Pneumonia</p>
+                                    <p class="text-sm text-gray-500">الالتهاب الرئوي المرتبط بالتنفس الصناعي</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-xl transition-transform" id="vap-icon"></i>
+                        </div>
+                    </div>
+                    <div id="vap-content" class="protocol-expanded px-6 pb-6">
+                        <div class="bg-green-50 p-5 rounded-xl space-y-4 text-right">
+                            <div class="border-r-4 border-green-500 pr-4">
+                                <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-syringe ml-2"></i>العلاج المبدئي:</h4>
+                                <p class="text-gray-700 leading-relaxed">
+                                    • <strong>تغطية Pseudomonas:</strong><br>
+                                    - Piperacillin/Tazobactam 4.5g كل 6 ساعات أو<br>
+                                    - Cefepime 2g كل 8 ساعات أو<br>
+                                    - Meropenem 1-2g كل 8 ساعات<br>
+                                    • <strong>+ تغطية MRSA:</strong> Vancomycin أو Linezolid<br>
+                                    • <strong>العلاج المركب:</strong> للحالات الشديدة مع P. aeruginosa
+                                </p>
+                            </div>
+                            <div class="border-r-4 border-blue-500 pr-4">
+                                <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-calendar-check ml-2"></i>المدة الموصى بها:</h4>
+                                <p class="text-gray-700 leading-relaxed">
+                                    • <strong>7 أيام</strong> للحالات غير المعقدة<br>
+                                    • التقييم المستمر بناءً على الاستجابة السريرية والفحوصات<br>
+                                    • يمكن استخدام Procalcitonin (PCT) للمساعدة في قرار الإيقاف
+                                </p>
+                            </div>
+                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mt-3">
+                                <p class="text-sm text-yellow-800 font-bold">
+                                    <i class="fas fa-exclamation-triangle ml-2"></i>
+                                    يجب تعديل العلاج بناءً على نتائج المزرعة والحساسية.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-2xl border-2 border-blue-100 mt-8 bounce-in">
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-info-circle text-blue-600 text-3xl mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-2">ملاحظات هامة:</h4>
+                            <ul class="text-gray-700 space-y-2 text-sm leading-relaxed">
+                                <li>• جميع البروتوكولات استرشادية ويجب تطبيق بروتوكول المستشفى الداخلي.</li>
+                                <li>• يجب تعديل الجرعات حسب وظائف الكلى والكبد.</li>
+                                <li>• التقييم اليومي لإمكانية تقليل أو إيقاف العلاج (De-escalation).</li>
+                                <li>• يُفضل أخذ مزارع قبل بدء العلاج متى أمكن.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t mt-auto py-6 text-center text-gray-500 text-sm slide-in-right">
+        <p>جميع الحقوق محفوظة © مستشفى المطرية التعليمي 2026</p>
+        <p class="text-xs mt-2">تم التحديث: يناير 2026</p>
+    </footer>
+
+    <script>
+        // دالة التنقل بين الصفحات
+        function showSection(sectionId) {
+            document.getElementById('homeSection').classList.add('hidden-section');
+            document.getElementById('calculatorSection').classList.add('hidden-section');
+            document.getElementById('cabinetsSection').classList.add('hidden-section');
+            document.getElementById('protocolsSection').classList.add('hidden-section');
+            
+            document.getElementById(sectionId).classList.remove('hidden-section');
+            document.getElementById('backBtn').classList.remove('hidden');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goHome() {
+            showSection('homeSection');
+            document.getElementById('backBtn').classList.add('hidden');
+            resetCalculator();
+        }
+
+        // دالة توسيع/طي البروتوكولات
+        function toggleProtocol(protocolId) {
+            const content = document.getElementById(protocolId + '-content');
+            const icon = document.getElementById(protocolId + '-icon');
+            
+            content.classList.toggle('active');
+            icon.style.transform = content.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        function resetCalculator() {
+            const weightInput = document.getElementById('weightInput');
+            const ageInput = document.getElementById('ageInput');
+            const antibioticSelect = document.getElementById('antibioticSelect');
+            const liverCheck = document.getElementById('liverCheck');
+            const renalCheck = document.getElementById('renalCheck');
+
+            if (weightInput) weightInput.value = '';
+            if (ageInput) ageInput.value = '';
+            if (antibioticSelect) antibioticSelect.value = '';
+            if (liverCheck) liverCheck.checked = false;
+            if (renalCheck) renalCheck.checked = false;
+            
+            document.getElementById('resultPlaceholder').classList.remove('hidden');
+            document.getElementById('resultContent').classList.add('hidden');
+            
+            clearAllErrors();
+        }
+
+        function clearError(inputId) {
+            const input = document.getElementById(inputId);
+            const errorDiv = document.getElementById(inputId.replace('Input', 'Error').replace('Select', 'Error'));
+            
+            if (input) input.classList.remove('error');
+            if (errorDiv) {
+                errorDiv.classList.remove('show');
+                errorDiv.textContent = '';
+            }
+            
+            const generalError = document.getElementById('generalError');
+            if (generalError) {
+                generalError.classList.remove('show');
+                generalError.textContent = '';
+            }
+        }
+
+        function clearAllErrors() {
+            ['weightInput', 'ageInput', 'antibioticSelect'].forEach(id => {
+                clearError(id);
+            });
+        }
+
+        function showError(inputId, message) {
+            const input = document.getElementById(inputId);
+            const errorDiv = document.getElementById(inputId.replace('Input', 'Error').replace('Select', 'Error'));
+            
+            if (input) input.classList.add('error');
+            if (errorDiv) {
+                errorDiv.textContent = message;
+                errorDiv.classList.add('show');
+            }
+            
+            if (input) input.focus();
+        }
+
+        // حاسبة الجرعات المحسّنة بمعادلات دقيقة
+        function calculateDose() {
+            clearAllErrors();
+            
+            const weightInput = document.getElementById('weightInput');
+            const ageInput = document.getElementById('ageInput');
+            const antibioticSelect = document.getElementById('antibioticSelect');
+            const liverCheck = document.getElementById('liverCheck');
+            const renalCheck = document.getElementById('renalCheck');
+            
+            const weight = parseFloat(weightInput.value);
+            const age = parseFloat(ageInput.value);
+            const antibiotic = antibioticSelect.value;
+            const hasLiverIssue = liverCheck.checked;
+            const hasRenalIssue = renalCheck.checked;
+            
+            let hasError = false;
+
+            if (!weight || isNaN(weight) || weight <= 0) {
+                showError('weightInput', 'يرجى إدخال الوزن بشكل صحيح');
+                hasError = true;
+            } else if (weight > 500) {
+                showError('weightInput', 'الوزن يبدو غير واقعي');
+                hasError = true;
+            }
+
+            if (!age || isNaN(age) || age < 0) {
+                showError('ageInput', 'يرجى إدخال العمر بشكل صحيح');
+                hasError = true;
+            } else if (age > 120) {
+                showError('ageInput', 'العمر يبدو غير واقعي');
+                hasError = true;
+            }
+
+            if (!antibiotic) {
+                showError('antibioticSelect', 'يرجى اختيار المضاد الحيوي');
+                hasError = true;
+            }
+
+            if (hasError) return;
+
+            // معادلات دقيقة لكل مضاد حيوي
+            const antibioticDoses = {
+                'Amoxicillin': {
+                    infant: 20,
+                    child: 40,
+                    adult: 500,
+                    elderly: 500,
+                    frequency: 'ثلاث مرات يومياً',
+                    unit: 'مجم'
+                },
+                'Amoxicillin/Clavulanate': {
+                    infant: 25,
+                    child: 45,
+                    adult: 875,
+                    elderly: 875,
+                    frequency: 'مرتين يومياً',
+                    unit: 'مجم'
+                },
+                'Ceftriaxone': {
+                    infant: 50,
+                    child: 50,
+                    adult: 2000,
+                    elderly: 1000,
+                    frequency: 'مرة واحدة يومياً',
+                    unit: 'مجم'
+                },
+                'Azithromycin': {
+                    infant: 10,
+                    child: 10,
+                    adult: 500,
+                    elderly: 250,
+                    frequency: 'مرة واحدة يومياً',
+                    unit: 'مجم'
+                },
+                'Levofloxacin': {
+                    infant: 0,
+                    child: 0,
+                    adult: 750,
+                    elderly: 500,
+                    frequency: 'مرة واحدة يومياً',
+                    unit: 'مجم',
+                    warning: 'غير موصى به للأطفال'
+                },
+                'Meropenem': {
+                    infant: 20,
+                    child: 20,
+                    adult: 1000,
+                    elderly: 1000,
+                    frequency: 'كل 8 ساعات',
+                    unit: 'مجم'
+                },
+                'Vancomycin': {
+                    infant: 15,
+                    child: 15,
+                    adult: 15,
+                    elderly: 15,
+                    frequency: 'كل 12 ساعة',
+                    unit: 'مجم/كجم'
+                },
+                'Piperacillin/Tazobactam': {
+                    infant: 0,
+                    child: 100,
+                    adult: 4500,
+                    elderly: 4500,
+                    frequency: 'كل 6-8 ساعات',
+                    unit: 'مجم'
+                }
+            };
+
+            const drugData = antibioticDoses[antibiotic];
+            let dose = 0;
+            let ageGroup = '';
+            let frequency = drugData.frequency;
+            let warnings = [];
+
+            // حساب الجرعة حسب الفئة العمرية
+            if (age < 1) {
+                dose = weight * drugData.infant;
+                ageGroup = 'رضيع (أقل من سنة)';
+                if (drugData.infant === 0) {
+                    warnings.push('هذا الدواء غير موصى به للرضع');
+                }
+            } else if (age < 12) {
+                dose = weight * drugData.child;
+                ageGroup = 'طفل (1-11 سنة)';
+                if (drugData.child === 0) {
+                    warnings.push(drugData.warning || 'هذا الدواء غير موصى به للأطفال');
+                }
+            } else if (age >= 65) {
+                dose = drugData.unit === 'مجم/كجم' ? weight * drugData.elderly : drugData.elderly;
+                ageGroup = 'كبار السن (65+ سنة)';
+            } else {
+                dose = drugData.unit === 'مجم/كجم' ? weight * drugData.adult : drugData.adult;
+                ageGroup = 'بالغ (12-64 سنة)';
+            }
+
+            // تعديل الجرعة للحالات الخاصة
+            let reductionFactor = 1;
+            if (hasRenalIssue) {
+                reductionFactor *= 0.5;
+                warnings.push('تخفيض الجرعة 50% بسبب قصور الكلى');
+            }
+            if (hasLiverIssue) {
+                reductionFactor *= 0.75;
+                warnings.push('تخفيض الجرعة 25% بسبب قصور الكبد');
+            }
+            
+            dose = dose * reductionFactor;
+
+            // عرض النتائج
+            document.getElementById('resultPlaceholder').classList.add('hidden');
+            document.getElementById('resultContent').classList.remove('hidden');
+
+            document.getElementById('resAntibiotic').innerText = antibiotic;
+            document.getElementById('resDose').innerText = Math.round(dose) + ' ' + drugData.unit;
+            document.getElementById('frequencyText').innerText = frequency;
+            document.getElementById('ageGroupText').innerText = ageGroup;
+            
+            const warningDiv = document.getElementById('resWarning');
+            if (warnings.length > 0) {
+                warningDiv.classList.remove('hidden');
+                document.getElementById('warningText').innerText = warnings.join(' • ');
+            } else {
+                warningDiv.classList.add('hidden');
+            }
+            
+            document.getElementById('resultContent').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // دعم Enter للحساب
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = ['weightInput', 'ageInput'];
+            inputs.forEach(inputId => {
+                const input = document.getElementById(inputId);
+                if (input) {
+                    input.addEventListener('keypress', function(event) {
+                        if (event.key === 'Enter') {
+                            calculateDose();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
