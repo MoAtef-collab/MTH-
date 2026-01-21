@@ -15,8 +15,6 @@
         .hidden-section { display: none !important; }
         .card-hover { transition: all 0.3s ease; cursor: pointer; }
         .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        
-        /* تسيق البروتوكولات */
         .protocol-card { border-right: 4px solid #2D8B44; transition: all 0.3s; }
         .protocol-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
         .protocol-content.open { max-height: 2000px; transition: max-height 0.5s ease-in; }
@@ -28,7 +26,7 @@
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 h-24 flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <button id="backBtn" onclick="goHome()" class="hidden p-2 rounded-full hover:bg-gray-100 text-gray-600 transition-all">
+                <button id="backBtn" onclick="goBack()" class="hidden p-2 rounded-full hover:bg-gray-100 text-gray-600 transition-all">
                     <i id="backIcon" class="fas fa-arrow-right text-xl"></i>
                 </button>
                 <div class="flex items-center gap-2">
@@ -57,24 +55,82 @@
                 <p id="hero-desc" class="max-w-2xl mx-auto text-gray-500 text-lg">المنصة الرقمية الموحدة للتدريب والتعليم المستمر لجميع الكوادر الطبية والصيادلة.</p>
             </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div onclick="showSection('cabinetsSection')" class="bg-white p-8 rounded-[2.5rem] shadow-lg border-2 border-gray-50 flex flex-col items-center gap-6 card-hover">
-                    <div class="w-20 h-20 rounded-3xl bg-mth-gold flex items-center justify-center text-3xl text-white shadow-lg"><i class="fas fa-briefcase-medical"></i></div>
-                    <div><span id="btn-cabinets" class="text-2xl font-black block text-mth-gold">دواليب الطوارئ</span><span id="btn-cabinets-desc" class="text-sm text-gray-500 block mt-2">محتويات تفاعلية وفيديو</span></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div onclick="showSection('cabinetsSection')" class="bg-white p-6 rounded-[2rem] shadow-lg border-2 border-gray-50 flex flex-col items-center gap-4 card-hover">
+                    <div class="w-16 h-16 rounded-2xl bg-mth-gold flex items-center justify-center text-2xl text-white shadow-lg"><i class="fas fa-briefcase-medical"></i></div>
+                    <div><span id="btn-cabinets" class="text-xl font-black block text-mth-gold">دواليب الطوارئ</span></div>
                 </div>
-                <div onclick="showSection('calculatorSection')" class="bg-white p-8 rounded-[2.5rem] shadow-lg border-2 border-gray-50 flex flex-col items-center gap-6 card-hover">
-                    <div class="w-20 h-20 rounded-3xl bg-purple-600 flex items-center justify-center text-3xl text-white shadow-lg"><i class="fas fa-calculator"></i></div>
-                    <div><span id="btn-calc" class="text-2xl font-black block text-purple-700">حاسبة الجرعات</span><span id="btn-calc-desc" class="text-sm text-gray-500 block mt-2">حساب دقيق بمعادلات محدثة</span></div>
+                
+                <div onclick="showSection('amsSection')" class="bg-white p-6 rounded-[2rem] shadow-lg border-2 border-gray-50 flex flex-col items-center gap-4 card-hover">
+                    <div class="w-16 h-16 rounded-2xl bg-purple-600 flex items-center justify-center text-2xl text-white shadow-lg">
+                        <i class="fas fa-capsules"></i>
+                    </div>
+                    <div><span id="btn-ams" class="text-xl font-black block text-purple-700">سياسة صرف المضادات</span></div>
                 </div>
-                <div onclick="showSection('protocolsSection')" class="bg-white p-8 rounded-[2.5rem] shadow-lg border-2 border-gray-50 flex flex-col items-center gap-6 card-hover">
-                    <div class="w-20 h-20 rounded-3xl bg-green-600 flex items-center justify-center text-3xl text-white shadow-lg"><i class="fas fa-scroll"></i></div>
-                    <div><span id="btn-protocols" class="text-2xl font-black block text-green-700">البروتوكولات</span><span id="btn-protocols-desc" class="text-sm text-gray-500 block mt-2">أحدث البروتوكولات 2026</span></div>
+
+                <div onclick="showSection('protocolsSection')" class="bg-white p-6 rounded-[2rem] shadow-lg border-2 border-gray-50 flex flex-col items-center gap-4 card-hover">
+                    <div class="w-16 h-16 rounded-2xl bg-green-600 flex items-center justify-center text-2xl text-white shadow-lg"><i class="fas fa-scroll"></i></div>
+                    <div><span id="btn-protocols" class="text-xl font-black block text-green-700">البروتوكولات</span></div>
+                </div>
+                <div onclick="showSection('lecturesSection')" class="bg-white p-6 rounded-[2rem] shadow-lg border-2 border-gray-50 flex flex-col items-center gap-4 card-hover">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-600 flex items-center justify-center text-2xl text-white shadow-lg"><i class="fas fa-calendar-alt"></i></div>
+                    <div><span id="btn-lectures" class="text-xl font-black block text-blue-700">المحاضرات الشهرية</span></div>
                 </div>
             </div>
         </div>
 
+        <div id="amsSection" class="hidden-section">
+            <h2 id="ams-title" class="text-3xl font-bold text-center mb-10">Anti Microbial Stewardship</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div onclick="showSection('amsJourneySection')" class="p-8 bg-blue-50 rounded-3xl border-2 border-blue-200 text-center card-hover">
+                    <i class="fas fa-pills text-5xl text-blue-500 mb-4"></i>
+                    <h3 id="ams-journey-title" class="text-2xl font-bold mb-2">مستشفى المضادات والرحلة العظيمة</h3>
+                </div>
+                <div onclick="alert(translations[currentLang].updating)" class="p-8 bg-gray-50 rounded-3xl border-2 border-gray-200 text-center card-hover opacity-75">
+                    <i class="fas fa-calculator text-5xl text-gray-400 mb-4"></i>
+                    <h3 id="ams-calc-title" class="text-2xl font-bold mb-2 text-gray-500">حاسبة الجرعات</h3>
+                    <p class="text-xs text-red-500 font-bold" id="ams-calc-status">(تحت التحديث)</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="amsJourneySection" class="hidden-section">
+            <h2 id="journey-title" class="text-2xl font-bold text-center mb-8">مستشفى المضادات والرحلة العظيمة</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+                <div class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">1</div>
+                <div class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">2</div>
+                <div class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">3</div>
+                <div class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">4</div>
+                <div class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">5</div>
+                <div class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">6</div>
+            </div>
+        </div>
+
+        <div id="lecturesSection" class="hidden-section">
+            <h2 id="lec-title" class="text-3xl font-bold text-center mb-10">المحاضرات الشهرية</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <script>
+                    const monthsAr = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
+                    const monthsEn = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                    for(let i=0; i<12; i++) {
+                        document.write(`
+                            <div onclick="${i === 0 ? "showSection('januaryPhoto')" : "alert('قريباً') "}" class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm text-center card-hover">
+                                <i class="fas fa-calendar-day text-blue-500 mb-2"></i>
+                                <div class="font-bold text-sm month-name" data-ar="${monthsAr[i]}" data-en="${monthsEn[i]}">${monthsAr[i]}</div>
+                            </div>
+                        `);
+                    }
+                </script>
+            </div>
+        </div>
+
+        <div id="januaryPhoto" class="hidden-section text-center">
+            <h2 class="text-2xl font-bold mb-6">محاضرة شهر يناير</h2>
+            <img src="https://lh3.googleusercontent.com/d/1yP44Mpmk4IRSbad16mqR5gx5dqYxI6lf" alt="January Lecture" class="max-w-full md:max-w-2xl mx-auto rounded-xl shadow-2xl border-4 border-white">
+        </div>
+
         <div id="cabinetsSection" class="hidden-section">
-            <h2 id="cab-title" class="text-3xl font-bold text-center mb-10">دواليب الطوارئ</h2>
+            <h2 id="cab-title" class="text-3xl font-bold text-center mb-10 text-mth-gold">دواليب الطوارئ</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <div class="p-8 bg-orange-50 rounded-3xl border-2 border-orange-200 text-center">
                     <i class="fas fa-fire text-5xl text-orange-500 mb-4"></i>
@@ -85,104 +141,66 @@
                 </div>
                 <div class="p-8 bg-red-50 rounded-3xl border-2 border-red-200 text-center">
                     <i class="fas fa-heartbeat text-5xl text-red-500 mb-4"></i>
-                    <h3 id="er-cab-name" class="text-2xl font-bold mb-4">دولاب الكوارث </h3>
+                    <h3 id="er-cab-name" class="text-2xl font-bold mb-4">دولاب الكوارث</h3>
                     <p id="er-cab-desc" class="text-gray-600">قريباً: شرح تفصيلي لمحتويات دولاب الطوارئ</p>
                 </div>
             </div>
         </div>
 
         <div id="protocolsSection" class="hidden-section">
-            <h2 id="prot-title-sec" class="text-3xl font-bold text-center mb-10">البروتوكولات الطبية 2026</h2>
+            <h2 id="prot-title-sec" class="text-3xl font-bold text-center mb-10 text-green-700">البروتوكولات الطبية 2026</h2>
+            <div class="max-w-2xl mx-auto">
+                <div onclick="showSection('pneumoniaSection')" class="bg-white p-8 rounded-3xl shadow-md border-2 border-green-50 flex items-center justify-between card-hover">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-2xl"><i class="fas fa-lungs"></i></div>
+                        <span id="pneumonia-btn" class="text-2xl font-bold text-gray-800">Pneumonia</span>
+                    </div>
+                    <i class="fas fa-chevron-left text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+
+        <div id="pneumoniaSection" class="hidden-section">
+            <div class="max-w-4xl mx-auto flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold text-green-700">Pneumonia Protocols</h2>
+                <a href="https://drive.google.com/file/d/1Epry7pCQZmPwfVjUv_h9tHqYzwuJTlID/view" target="_blank" class="bg-red-500 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 shadow hover:bg-red-600">
+                    <i class="fas fa-file-pdf"></i> <span id="pdf-download-text">تحميل PDF</span>
+                </a>
+            </div>
+            
             <div class="max-w-4xl mx-auto space-y-4">
-                
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden protocol-card">
                     <div onclick="toggleAccordion('hap-prot')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
-                        <div class="flex items-center gap-3">
-                            <i class="fas fa-hospital text-blue-600"></i>
-                            <span class="font-bold text-lg">Nosocomial Pneumonia (HAP)</span>
-                        </div>
+                        <div class="flex items-center gap-3"><i class="fas fa-hospital text-blue-600"></i><span class="font-bold text-lg">Nosocomial Pneumonia (HAP)</span></div>
                         <i class="fas fa-chevron-down text-gray-400"></i>
                     </div>
                     <div id="hap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
-                        <div class="bg-blue-50 p-3 rounded-lg">
-                            <h4 class="font-bold text-blue-800 mb-2 underline">No risk factors for MDR micro-organisms:</h4>
-                            <p><strong><span class="line-badge">1st Line</span></strong> Ceftazidime 1-2g/8h OR Cefepime 2g/8-12h OR Piperacillin/Tazobactam 4.5g/6h</p>
-                            <p class="mt-2"><strong><span class="line-badge">2nd Line</span></strong> Meropenem 1g/8h</p>
-                            <div class="mt-2 p-2 bg-yellow-100 rounded text-xs">
-                                <strong>ADD anti-MRSA if risk factors present:</strong><br>
-                                - 1st: Vancomycin 15-20mg/kg/dose every 8-12h<br>
-                                - 2nd: Linezolid 600mg/12h<br>
-                                - 3rd: Teicoplanin 6mg/kg/12h (3 doses) then 6mg/kg daily
-                            </div>
-                        </div>
-                        <div class="bg-red-50 p-3 rounded-lg">
-                            <h4 class="font-bold text-red-800 mb-2 underline">With risk factors for MDR (Ventilation, Shock, IV Abx < 90 days):</h4>
-                            <p><strong><span class="line-badge">1st Line</span></strong> Meropenem 1g/8h</p>
-                            <p><strong><span class="line-badge">2nd Line</span></strong> Imipenem-cilastatin 500mg/6h</p>
-                            <p class="mt-2 font-bold text-red-600 uppercase italic">PLUS:</p>
-                            <p>- Antipseudomonal Fluoroquinolone (Levofloxacin/Ciprofloxacin 400mg/8h) OR Aminoglycosides (Amikacin)</p>
-                            <p class="mt-2 font-bold text-red-600 uppercase italic">PLUS Anti-MRSA:</p>
-                            <p>- Vancomycin (1st) or Linezolid (2nd)</p>
-                        </div>
-                        <p class="text-xs font-bold text-gray-500">Duration: 7 days (may extend to 10-14 days)</p>
+                        <div class="bg-blue-50 p-3 rounded-lg"><h4 class="font-bold text-blue-800 mb-2 underline">No risk factors for MDR:</h4><p>Ceftazidime, Cefepime, or Pip/Tazo</p></div>
+                        <div class="bg-red-50 p-3 rounded-lg"><h4 class="font-bold text-red-800 mb-2 underline">With risk factors:</h4><p>Meropenem + Quinolone/Amikacin + Anti-MRSA</p></div>
                     </div>
                 </div>
 
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden protocol-card" style="border-right-color: #6D28D9;">
                     <div onclick="toggleAccordion('vap-prot')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
-                        <div class="flex items-center gap-3">
-                            <i class="fas fa-fan text-purple-600"></i>
-                            <span class="font-bold text-lg">Nosocomial Pneumonia (VAP)</span>
-                        </div>
+                        <div class="flex items-center gap-3"><i class="fas fa-fan text-purple-600"></i><span class="font-bold text-lg">Nosocomial Pneumonia (VAP)</span></div>
                         <i class="fas fa-chevron-down text-gray-400"></i>
                     </div>
                     <div id="vap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
-                        <div class="bg-purple-50 p-3 rounded-lg">
-                            <h4 class="font-bold text-purple-800 mb-2 underline">No risk factors for MDR:</h4>
-                            <p>Same as HAP protocol (Ceftazidime, Cefepime, or Pip/Tazo).</p>
-                        </div>
-                        <div class="bg-orange-50 p-3 rounded-lg">
-                            <h4 class="font-bold text-orange-800 mb-2 underline">With risk factors for MDR (ARDS, Shock, Abx < 90d, Hosp > 5d, RRT):</h4>
-                            <p><strong><span class="line-badge">1st Line</span></strong> Meropenem 1g/8h PLUS Antipseudomonal (Quinolone/Amikacin) PLUS Anti-MRSA (Vanco/Linezolid)</p>
-                        </div>
-                        <p class="text-xs font-bold text-gray-500">Duration: 7 days (up to 10-14 in severe cases)</p>
+                        <div class="bg-purple-50 p-3 rounded-lg"><h4 class="font-bold text-purple-800 mb-2 underline">MDR Risk Factors:</h4><p>Meropenem + Antipseudomonal + Anti-MRSA</p></div>
                     </div>
                 </div>
 
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden protocol-card" style="border-right-color: #2563eb;">
                     <div onclick="toggleAccordion('cap-prot')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
-                        <div class="flex items-center gap-3">
-                            <i class="fas fa-users text-blue-500"></i>
-                            <span class="font-bold text-lg">Community Acquired Pneumonia (CAP)</span>
-                        </div>
+                        <div class="flex items-center gap-3"><i class="fas fa-users text-blue-500"></i><span class="font-bold text-lg">Community Acquired (CAP)</span></div>
                         <i class="fas fa-chevron-down text-gray-400"></i>
                     </div>
                     <div id="cap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
-                        <div class="bg-green-50 p-3 rounded-lg">
-                            <h4 class="font-bold text-green-800 mb-2">Non-severe (No MRSA/Ps risk):</h4>
-                            <p><strong>1st:</strong> Ampicillin-sulbactam 3g/6h + Clarithromycin 500mg/12h OR Ceftriaxone 1g/24h + Clarithromycin.</p>
-                            <p><strong>2nd:</strong> Moxifloxacin 400mg OR Levofloxacin 750mg (Monotherapy).</p>
-                        </div>
-                        <div class="bg-red-50 p-3 rounded-lg">
-                            <h4 class="font-bold text-red-800 mb-2">Severe (No MRSA/Ps risk):</h4>
-                            <p>Ampicillin-sulbactam OR Ceftriaxone <strong>PLUS</strong> Clarithromycin OR Quinolone.</p>
-                        </div>
-                        <div class="bg-gray-100 p-3 rounded-lg border-l-4 border-black">
-                            <h4 class="font-bold mb-2">Risk of Pseudomonas & MRSA:</h4>
-                            <p><strong>1st:</strong> Ceftazidime or Cefepime | <strong>2nd:</strong> Pip/Tazo or Meropenem</p>
-                            <p class="font-bold text-blue-700 mt-1">PLUS:</p>
-                            <p>Levofloxacin 750mg OR Amikacin 15mg/kg (if Amikacin, add Azithromycin)</p>
-                            <p class="font-bold text-blue-700 mt-1">PLUS Anti-MRSA:</p>
-                            <p>Vancomycin OR Linezolid OR Teicoplanin.</p>
-                        </div>
-                        <p class="text-xs font-bold text-gray-500">Duration: 5-7 days</p>
+                        <div class="bg-green-50 p-3 rounded-lg"><h4 class="font-bold text-green-800 mb-2">Non-severe:</h4><p>Ceftriaxone + Clarithromycin</p></div>
                     </div>
                 </div>
-
             </div>
         </div>
-
-        <div id="calculatorSection" class="hidden-section"></div>
 
     </main>
 
@@ -196,28 +214,32 @@
                 title: "أكاديمية قسم الصيدلية - مستشفى المطرية التعليمي", subtitle: "بوابة التعليم الطبي المستمر",
                 langBtn: "English", badge: "التميز في التعليم الصيدلي", heroT: "المنصة التعليمية لقسم الصيدلية",
                 heroD: "المنصة الرقمية الموحدة للتدريب والتعليم المستمر لجميع الكوادر الطبية والصيادلة.",
-                cab: "دواليب الطوارئ", calc: "حاسبة الجرعات", prot: "البروتوكولات",
-                cabDesc: "محتويات تفاعلية وفيديو", calcDesc: "حساب دقيق بمعادلات محدثة", protDesc: "أحدث البروتوكولات 2026",
-                burnN: "دولاب الحروق", burnB: "اضغط هنا لمشاهدة الفيديو", updating: "جارِ التحديث... يتم الآن تطوير حاسبة الجرعات بمعادلات 2026 الجديدة.",
-                rights: "جميع الحقوق محفوظة © مستشفى المطرية التعليمي 2026", erN: "دولاب الطوارئ (ER)", erD: "قريباً: شرح تفصيلي لمحتويات دولاب الطوارئ", protSec: "البروتوكولات الطبية 2026"
+                cab: "دواليب الطوارئ", ams: "سياسة صرف المضادات الحيوية", prot: "البروتوكولات", lec: "المحاضرات الشهرية",
+                amsJourney: "مستشفى المضادات والرحلة العظيمة", amsCalc: "حاسبة الجرعات", amsCalcStatus: "(تحت التحديث)",
+                burnN: "دولاب الحروق", burnB: "اضغط هنا لمشاهدة الفيديو", updating: "هذه الميزة تحت التحديث حالياً",
+                rights: "جميع الحقوق محفوظة © مستشفى المطرية التعليمي 2026", erN: "دولاب الكوارث", erD: "قريباً: شرح تفصيلي لمحتويات دولاب الطوارئ", 
+                protSec: "البروتوكولات الطبية 2026", pneumonia: "Pneumonia", download: "تحميل PDF"
             },
             en: {
                 title: "Pharmacy Dept Academy - Mataria Hospital", subtitle: "Medical Education Portal",
                 langBtn: "العربية", badge: "Excellence in Pharmacy Education", heroT: "Pharmacy Learning Platform",
                 heroD: "Unified digital platform for continuous training of all medical staff and pharmacists.",
-                cab: "Emergency Cabinets", calc: "Dose Calculator", prot: "Protocols",
-                cabDesc: "Interactive content & videos", calcDesc: "Accurate updated calculations", protDesc: "Latest 2026 Protocols",
-                burnN: "Burns Cabinet", burnB: "Click here for video", updating: "Updating... 2026 dose equations are being implemented.",
-                rights: "All Rights Reserved © Mataria Teaching Hospital 2026", erN: "ER Cabinet", erD: "Coming Soon: Detailed ER cabinet contents", protSec: "Medical Protocols 2026"
+                cab: "Emergency Cabinets", ams: "Anti Microbial Stewardship", prot: "Protocols", lec: "Monthly Lectures",
+                amsJourney: "Antimicrobial Hospital & Great Journey", amsCalc: "Dose Calculator", amsCalcStatus: "(Under Update)",
+                burnN: "Burns Cabinet", burnB: "Click here for video", updating: "This feature is currently under update",
+                rights: "All Rights Reserved © Mataria Teaching Hospital 2026", erN: "ER Cabinet", erD: "Coming Soon: Detailed ER cabinet contents", 
+                protSec: "Medical Protocols 2026", pneumonia: "Pneumonia", download: "Download PDF"
             }
         };
 
         let currentLang = 'ar';
+        let navigationHistory = ['homeSection'];
 
         function toggleLanguage() {
             currentLang = currentLang === 'ar' ? 'en' : 'ar';
             document.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
             const t = translations[currentLang];
+            
             document.getElementById('site-title').innerText = t.title;
             document.getElementById('site-subtitle').innerText = t.subtitle;
             document.getElementById('langBtnText').innerText = t.langBtn;
@@ -225,44 +247,49 @@
             document.getElementById('hero-title').innerText = t.heroT;
             document.getElementById('hero-desc').innerText = t.heroD;
             document.getElementById('btn-cabinets').innerText = t.cab;
-            document.getElementById('btn-calc').innerText = t.calc;
+            document.getElementById('btn-ams').innerText = t.ams;
             document.getElementById('btn-protocols').innerText = t.prot;
-            document.getElementById('btn-cabinets-desc').innerText = t.cabDesc;
-            document.getElementById('btn-calc-desc').innerText = t.calcDesc;
-            document.getElementById('btn-protocols-desc').innerText = t.protDesc;
-            document.getElementById('burn-cab-name').innerText = t.burnN;
-            document.getElementById('burn-btn-text').innerText = t.burnB;
-            document.getElementById('er-cab-name').innerText = t.erN;
-            document.getElementById('er-cab-desc').innerText = t.erD;
-            document.getElementById('prot-title-sec').innerText = t.protSec;
+            document.getElementById('btn-lectures').innerText = t.lec;
+            document.getElementById('ams-title').innerText = currentLang === 'ar' ? "سياسة صرف المضادات الحيوية" : "Anti Microbial Stewardship";
+            document.getElementById('ams-journey-title').innerText = t.amsJourney;
+            document.getElementById('ams-calc-title').innerText = t.amsCalc;
+            document.getElementById('ams-calc-status').innerText = t.amsCalcStatus;
+            document.getElementById('lec-title').innerText = t.lec;
+            document.getElementById('pneumonia-btn').innerText = t.pneumonia;
+            document.getElementById('pdf-download-text').innerText = t.download;
             document.getElementById('footer-rights').innerText = t.rights;
+            
+            document.querySelectorAll('.month-name').forEach(el => {
+                el.innerText = el.getAttribute(`data-${currentLang}`);
+            });
+
             document.getElementById('backIcon').className = currentLang === 'ar' ? 'fas fa-arrow-right text-xl' : 'fas fa-arrow-left text-xl';
         }
 
         function showSection(id) {
-            if (id === 'calculatorSection') { alert(translations[currentLang].updating); return; }
-            document.getElementById('homeSection').classList.add('hidden-section');
-            document.getElementById('cabinetsSection').classList.add('hidden-section');
-            document.getElementById('protocolsSection').classList.add('hidden-section');
+            document.querySelectorAll('main > div').forEach(d => d.classList.add('hidden-section'));
             document.getElementById(id).classList.remove('hidden-section');
             document.getElementById('backBtn').classList.remove('hidden');
+            navigationHistory.push(id);
             window.scrollTo(0,0);
         }
 
-        function goHome() {
-            document.querySelectorAll('main > div').forEach(d => d.classList.add('hidden-section'));
-            document.getElementById('homeSection').classList.remove('hidden-section');
-            document.getElementById('backBtn').classList.add('hidden');
+        function goBack() {
+            if (navigationHistory.length > 1) {
+                navigationHistory.pop();
+                const prevSection = navigationHistory[navigationHistory.length - 1];
+                document.querySelectorAll('main > div').forEach(d => d.classList.add('hidden-section'));
+                document.getElementById(prevSection).classList.remove('hidden-section');
+                if (prevSection === 'homeSection') document.getElementById('backBtn').classList.add('hidden');
+            }
         }
 
         function toggleAccordion(id) {
             const content = document.getElementById(id);
             const icon = content.previousElementSibling.querySelector('.fa-chevron-down');
             const isOpen = content.classList.contains('open');
-            
             document.querySelectorAll('.protocol-content').forEach(c => c.classList.remove('open'));
             document.querySelectorAll('.fa-chevron-down').forEach(i => i.style.transform = 'rotate(0deg)');
-
             if (!isOpen) {
                 content.classList.add('open');
                 icon.style.transform = 'rotate(180deg)';
@@ -271,5 +298,3 @@
     </script>
 </body>
 </html>
-
-
