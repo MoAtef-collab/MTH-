@@ -7,9 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    
     <style>
-        body { font-family: 'Cairo', sans-serif; background-color: #FBFBFE; }
+        body { font-family: 'Cairo', sans-serif; background-color: #FBFBFE; overflow-x: hidden; }
         .bg-mth-gold { background-color: #C5A021; }
         .text-mth-gold { color: #C5A021; }
         .hidden-section { display: none !important; }
@@ -26,27 +25,26 @@
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 h-24 flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <button id="backBtn" onclick="goBack()" class="hidden p-2 rounded-full hover:bg-gray-100 text-gray-600 transition-all">
+                <button id="backBtn" onclick="goBack()" class="hidden p-2 rounded-full hover:bg-gray-100 text-gray-600">
                     <i id="backIcon" class="fas fa-arrow-right text-xl"></i>
                 </button>
                 <div class="flex items-center gap-2">
                     <img src="https://i.postimg.cc/8k7Gv3qN/lwjw-almstshfy-bdwn-khlfyt.png" alt="Logo 1" class="h-12 md:h-16 w-auto">
-                    <div class="h-10 w-px bg-gray-200 mx-1"></div>
                     <img src="https://i.postimg.cc/k4jRp76m/clinical.png" alt="Logo 2" class="h-12 md:h-16 w-auto">
                 </div>
-                <div class="hidden sm:flex flex-col text-right" id="header-text-container">
-                    <h1 id="site-title" class="text-lg md:text-xl font-bold text-gray-900 leading-tight text-right">أكاديمية قسم الصيدلية - مستشفى المطرية التعليمي</h1>
-                    <span id="site-subtitle" class="text-xs text-mth-gold font-bold uppercase text-right">بوابة التعليم الطبي المستمر</span>
+                <div id="header-texts" class="hidden sm:flex flex-col">
+                    <h1 id="site-title" class="text-lg md:text-xl font-bold text-gray-900 leading-tight">أكاديمية قسم الصيدلية - مستشفى المطرية التعليمي</h1>
+                    <span id="site-subtitle" class="text-xs text-mth-gold font-bold uppercase">بوابة التعليم الطبي المستمر</span>
                 </div>
             </div>
-            <button onclick="toggleLanguage()" class="px-4 py-2 rounded-lg bg-gray-50 text-gray-700 font-bold border border-gray-200 hover:bg-gray-100 flex items-center gap-2">
+            <button onclick="toggleLanguage()" class="px-4 py-2 rounded-lg bg-gray-50 text-gray-700 font-bold border border-gray-200 flex items-center gap-2">
                 <i class="fas fa-globe text-mth-gold"></i>
                 <span id="langBtnText">English</span>
             </button>
         </div>
     </header>
 
-    <main class="flex-grow max-w-7xl mx-auto px-4 w-full py-8">
+    <main class="flex-grow max-w-7xl mx-auto px-4 w-full py-8 text-right" id="main-content">
         
         <div id="homeSection" class="space-y-10 text-center">
             <section class="space-y-4 pt-8">
@@ -57,11 +55,11 @@
 
             <div class="max-w-md mx-auto mb-10 relative">
                 <div class="relative">
-                    <input type="text" id="mainSearch" onkeyup="liveSearch()" placeholder="ابحث عن بروتوكول أو دواء (مثلاً: CAP أو Vancomycin)" 
+                    <input type="text" id="mainSearch" onkeyup="liveSearch()" placeholder="ابحث عن بروتوكول أو دواء..." 
                            class="w-full px-6 py-4 rounded-full border-2 border-gray-100 shadow-sm focus:border-mth-gold focus:outline-none text-right">
                     <i class="fas fa-search absolute left-6 top-1/2 -translate-y-1/2 text-gray-400"></i>
                 </div>
-                <div id="searchResults" class="absolute z-50 w-full bg-white mt-2 rounded-2xl shadow-xl hidden overflow-hidden border border-gray-100 text-right"></div>
+                <div id="searchResults" class="absolute z-50 w-full bg-white mt-2 rounded-2xl shadow-xl hidden overflow-hidden border border-gray-100"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -71,7 +69,7 @@
                 </div>
                 <div onclick="showSection('amsSection')" class="bg-white p-6 rounded-[2rem] shadow-lg border-2 border-gray-50 flex flex-col items-center gap-4 card-hover">
                     <div class="w-16 h-16 rounded-2xl bg-purple-600 flex items-center justify-center text-2xl text-white shadow-lg"><i class="fas fa-capsules"></i></div>
-                    <span id="btn-ams" class="text-xl font-black text-purple-700">سياسة صرف المضادات</span>
+                    <span id="btn-ams" class="text-xl font-black text-purple-700 text-center">سياسة صرف المضادات</span>
                 </div>
                 <div onclick="showSection('protocolsSection')" class="bg-white p-6 rounded-[2rem] shadow-lg border-2 border-gray-50 flex flex-col items-center gap-4 card-hover">
                     <div class="w-16 h-16 rounded-2xl bg-green-600 flex items-center justify-center text-2xl text-white shadow-lg"><i class="fas fa-scroll"></i></div>
@@ -85,48 +83,44 @@
         </div>
 
         <div id="amsSection" class="hidden-section text-center">
-            <h2 id="ams-title" class="text-3xl font-bold mb-10">Anti Microbial Stewardship</h2>
+            <h2 class="text-3xl font-bold mb-10" id="ams-title-header">Anti Microbial Stewardship</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div onclick="showSection('amsJourneySection')" class="p-8 bg-blue-50 rounded-3xl border-2 border-blue-200 text-center card-hover">
+                <div onclick="showSection('amsJourneySection')" class="p-8 bg-blue-50 rounded-3xl border-2 border-blue-200 card-hover">
                     <i class="fas fa-pills text-5xl text-blue-500 mb-4"></i>
-                    <h3 id="ams-journey-title" class="text-2xl font-bold mb-2">مستشفى المضادات والرحلة العظيمة</h3>
+                    <h3 class="text-2xl font-bold mb-2 journey-title-text">مستشفى المضادات والرحلة العظيمة</h3>
                 </div>
-                <div onclick="alert(translations[currentLang].updating)" class="p-8 bg-gray-50 rounded-3xl border-2 border-gray-200 text-center card-hover opacity-75">
+                <div onclick="alert(currentLang === 'ar' ? 'تحت التحديث' : 'Updating')" class="p-8 bg-gray-50 rounded-3xl border-2 border-gray-200 opacity-75">
                     <i class="fas fa-calculator text-5xl text-gray-400 mb-4"></i>
-                    <h3 id="ams-calc-title" class="text-2xl font-bold mb-2 text-gray-500 text-ams-calc">حاسبة الجرعات</h3>
-                    <p class="text-xs text-red-500 font-bold ams-status">(تحت التحديث)</p>
+                    <h3 class="text-2xl font-bold mb-2 calc-title-text">حاسبة الجرعات</h3>
                 </div>
             </div>
         </div>
 
         <div id="amsJourneySection" class="hidden-section text-center">
-            <h2 id="journey-title" class="text-2xl font-bold mb-8 text-blue-800">مستشفى المضادات والرحلة العظيمة</h2>
+            <h2 class="text-2xl font-bold mb-8 text-blue-800 journey-title-text">مستشفى المضادات والرحلة العظيمة</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-                <div onclick="playVideo('https://drive.google.com/file/d/1kapCfJwWNJ--KAMezjzuwDA0YeaJEtTQ/preview')" class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">1</div>
-                <div onclick="playVideo('https://drive.google.com/file/d/11zMpJtQ87OLcT7HPpXzPEDmvPL9ggO_k/preview')" class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">2</div>
-                <div onclick="playVideo('https://drive.google.com/file/d/11dRO0CxqjRKVeGKggDoGBDPMr5k7D2-N/preview')" class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">3</div>
+                <div onclick="playVideo('https://drive.google.com/file/d/1kapCfJwWNJ--KAMezjzuwDA0YeaJEtTQ/preview')" class="w-20 h-20 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-2xl text-white font-bold cursor-pointer hover:scale-110 shadow-lg">1</div>
+                <div onclick="playVideo('https://drive.google.com/file/d/11zMpJtQ87OLcT7HPpXzPEDmvPL9ggO_k/preview')" class="w-20 h-20 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-2xl text-white font-bold cursor-pointer hover:scale-110 shadow-lg">2</div>
+                <div onclick="playVideo('https://drive.google.com/file/d/11dRO0CxqjRKVeGKggDoGBDPMr5k7D2-N/preview')" class="w-20 h-20 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-2xl text-white font-bold cursor-pointer hover:scale-110 shadow-lg">3</div>
             </div>
         </div>
 
         <div id="videoPlayerSection" class="hidden-section">
             <div class="max-w-4xl mx-auto">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-bold text-blue-700" id="video-header-title">مشاهدة الحلقة</h2>
-                    <button onclick="goBack()" class="bg-red-100 text-red-600 px-4 py-1 rounded-full text-sm font-bold">إغلاق X</button>
-                </div>
-                <div class="relative pb-[56.25%] h-0 overflow-hidden rounded-2xl shadow-2xl border-4 border-white bg-black">
-                    <iframe id="videoIframe" class="absolute top-0 left-0 w-full h-full" src="" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+                <div class="flex justify-between items-center mb-4"><h2 class="font-bold text-blue-700 vid-watch-text">مشاهدة الحلقة</h2><button onclick="goBack()" class="text-red-500 font-bold">X</button></div>
+                <div class="relative pb-[56.25%] h-0 rounded-2xl overflow-hidden shadow-2xl bg-black">
+                    <iframe id="videoIframe" class="absolute top-0 left-0 w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
 
         <div id="protocolsSection" class="hidden-section">
-            <h2 id="prot-title-sec" class="text-3xl font-bold text-center mb-10 text-green-700">البروتوكولات الطبية 2026</h2>
+            <h2 class="text-3xl font-bold text-center mb-10 text-green-700" id="prot-main-title">البروتوكولات الطبية 2026</h2>
             <div class="max-w-2xl mx-auto">
                 <div onclick="showSection('pneumoniaSection')" class="bg-white p-8 rounded-3xl shadow-md border-2 border-green-50 flex items-center justify-between card-hover">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-2xl"><i class="fas fa-lungs"></i></div>
-                        <span id="pneumonia-btn" class="text-2xl font-bold text-gray-800">Pneumonia</span>
+                        <span class="text-2xl font-bold text-gray-800">Pneumonia</span>
                     </div>
                     <i class="fas fa-chevron-left text-gray-400 nav-arrow"></i>
                 </div>
@@ -134,48 +128,82 @@
         </div>
 
         <div id="pneumoniaSection" class="hidden-section">
-            <div class="max-w-4xl mx-auto flex justify-between items-center mb-8">
+            <div class="flex justify-between items-center mb-8">
                 <h2 class="text-3xl font-bold text-green-700">Pneumonia Protocols</h2>
-                <a href="https://drive.google.com/file/d/1Epry7pCQZmPwfVjUv_h9tHqYzwuJTlID/view" target="_blank" class="bg-red-500 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 shadow">
-                    <i class="fas fa-file-pdf"></i> <span id="pdf-download-text">تحميل PDF</span>
-                </a>
+                <a href="https://drive.google.com/file/d/1Epry7pCQZmPwfVjUv_h9tHqYzwuJTlID/view" target="_blank" class="bg-red-500 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 shadow"><i class="fas fa-file-pdf"></i> PDF</a>
             </div>
-            <div class="max-w-4xl mx-auto space-y-4">
-                <div id="hap-prot-card" class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden protocol-card" style="border-right-color: #2563eb;">
-                    <div onclick="toggleAccordion('hap-prot')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
-                        <div class="flex items-center gap-3"><i class="fas fa-hospital text-blue-600"></i><span class="font-bold text-lg">HAP</span></div>
-                        <i class="fas fa-chevron-down text-gray-400"></i>
+            
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden protocol-card mb-4">
+                <div onclick="toggleAccordion('hap-prot')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
+                    <span class="font-bold text-lg">Nosocomial Pneumonia (HAP)</span><i class="fas fa-chevron-down text-gray-400"></i>
+                </div>
+                <div id="hap-prot" class="protocol-content px-5 pb-5 space-y-4 text-sm border-t border-gray-50 pt-4">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-blue-800 underline mb-2">If NO risk factors for MDR:</h4>
+                        <p><span class="line-badge">1ST line</span> Ceftazidime 1-2g/8hr OR Cefepime 2g/8-12hr OR Pip/Tazo 4.5g/6hr</p>
+                        <p><span class="line-badge">2nd line</span> Meropenem 1g/8hr</p>
+                        <p class="mt-2 text-red-600 font-bold">ADD anti-MRSA if risk factors present (Vancomycin, Linezolid, or Teicoplanin)</p>
                     </div>
-                    <div id="hap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 pt-4 border-t border-gray-50">
-                        <div class="bg-blue-50 p-4 rounded-lg">Ceftazidime, Cefepime, Pip/Tazo, Meropenem</div>
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-red-800 underline mb-2">If risk factors for MDR:</h4>
+                        <p><span class="line-badge">1ST line</span> Meropenem 1g/8h | <span class="line-badge">2nd line</span> Imipenem 500mg/6hrs</p>
+                        <p class="font-bold mt-2">+ PLUS: Levofloxacin / Ciprofloxacin 400mg/8hr OR Amikacin</p>
+                        <p class="font-bold mt-2">+ PLUS: Anti-MRSA (Vancomycin OR Linezolid)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden protocol-card mb-4" style="border-right-color: #6D28D9;">
+                <div onclick="toggleAccordion('vap-prot')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
+                    <span class="font-bold text-lg">Nosocomial Pneumonia (VAP)</span><i class="fas fa-chevron-down text-gray-400"></i>
+                </div>
+                <div id="vap-prot" class="protocol-content px-5 pb-5 space-y-4 text-sm border-t border-gray-50 pt-4">
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-red-800 underline mb-2">Risk factors for MDR (VAP):</h4>
+                        <p><span class="line-badge">1ST line</span> Meropenem 1g/8h | <span class="line-badge">2nd line</span> Imipenem 500mg/6hrs</p>
+                        <p class="mt-2 font-bold">+ PLUS: Levofloxacin / Ciprofloxacin OR Amikacin</p>
+                        <p class="mt-2 font-bold">+ PLUS: Anti-MRSA (Vancomycin OR Linezolid)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden protocol-card mb-4" style="border-right-color: #059669;">
+                <div onclick="toggleAccordion('cap-prot')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
+                    <span class="font-bold text-lg">Community Acquired (CAP)</span><i class="fas fa-chevron-down text-gray-400"></i>
+                </div>
+                <div id="cap-prot" class="protocol-content px-5 pb-5 space-y-4 text-sm border-t border-gray-50 pt-4">
+                    <div class="bg-emerald-50 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">Non-severe:</h4>
+                        <p>Ampicillin-sulbactam 3g/6hr + Clarithromycin 500mg/12hr</p>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">Pseudomonas & MRSA Risk:</h4>
+                        <p>Ceftazidime / Cefepime PLUS Levo / Amikacin PLUS Vancomycin / Linezolid</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="lecturesSection" class="hidden-section text-center">
-            <h2 id="lec-title" class="text-3xl font-bold mb-10">المحاضرات الشهرية</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto" id="months-grid">
-                </div>
+            <h2 class="text-3xl font-bold mb-10 lec-main-title">المحاضرات الشهرية</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto" id="lectures-grid"></div>
         </div>
 
-        <div id="januaryPhoto" class="hidden-section">
-            <div class="max-w-2xl mx-auto bg-white p-4 rounded-3xl shadow-xl border-4 border-blue-50">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-xl font-bold text-blue-700" id="jan-photo-title">محاضرة شهر يناير</h3>
-                    <button onclick="goBack()" class="text-red-500 font-bold">X</button>
-                </div>
-                <img src="https://i.postimg.cc/0j0Nq5r1/january-lecture.jpg" alt="January Lecture" class="w-full h-auto rounded-2xl">
+        <div id="januaryPhoto" class="hidden-section text-center">
+            <div class="max-w-2xl mx-auto bg-white p-6 rounded-3xl shadow-xl relative">
+                <button onclick="goBack()" class="absolute top-4 left-4 text-red-500 font-bold">X</button>
+                <h3 class="text-2xl font-bold mb-4">محاضرة شهر يناير</h3>
+                <img src="https://i.postimg.cc/0j0Nq5r1/january-lecture.jpg" class="w-full h-auto rounded-xl border" alt="Lecture">
             </div>
         </div>
 
         <div id="cabinetsSection" class="hidden-section text-center">
-            <h2 id="cab-title" class="text-3xl font-bold mb-10 text-mth-gold">دواليب الطوارئ</h2>
+            <h2 class="text-3xl font-bold mb-10 text-mth-gold cab-main-title">دواليب الطوارئ</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <div class="p-8 bg-orange-50 rounded-3xl border-2 border-orange-200">
                     <i class="fas fa-fire text-5xl text-orange-500 mb-4"></i>
-                    <h3 class="text-2xl font-bold mb-4 burn-name">دولاب الحروق</h3>
-                    <a href="https://drive.google.com/file/d/1E2YYiG68zHqS_3jHUoPMc0QsYvV-8mph/view" target="_blank" class="px-8 py-3 bg-orange-500 text-white rounded-full font-bold inline-block watch-video-text">مشاهدة الفيديو</a>
+                    <h3 class="text-2xl font-bold mb-4 burn-title-text">دولاب الحروق</h3>
+                    <a href="https://drive.google.com/file/d/1E2YYiG68zHqS_3jHUoPMc0QsYvV-8mph/view" target="_blank" class="px-6 py-2 bg-orange-500 text-white rounded-full font-bold btn-watch-text">مشاهدة الفيديو</a>
                 </div>
             </div>
         </div>
@@ -183,7 +211,7 @@
     </main>
 
     <footer class="bg-white border-t mt-auto py-6 text-center text-gray-500 text-sm">
-        <p id="footer-rights">جميع الحقوق محفوظة © مستشفى المطرية التعليمي 2026</p>
+        <p id="footer-text">جميع الحقوق محفوظة © مستشفى المطرية التعليمي 2026</p>
     </footer>
 
     <script>
@@ -191,31 +219,28 @@
             ar: {
                 title: "أكاديمية قسم الصيدلية - مستشفى المطرية التعليمي", subtitle: "بوابة التعليم الطبي المستمر", langBtn: "English", badge: "التميز في التعليم الصيدلي",
                 heroT: "المنصة التعليمية لقسم الصيدلية", heroD: "المنصة الرقمية الموحدة للتدريب والتعليم المستمر لجميع الكوادر الطبية والصيادلة.",
-                cab: "دواليب الطوارئ", ams: "سياسة صرف المضادات", prot: "البروتوكولات", lec: "المحاضرات الشهرية", searchPlace: "ابحث عن بروتوكول أو دواء...",
-                amsJourney: "مستشفى المضادات والرحلة العظيمة", amsCalc: "حاسبة الجرعات", amsStatus: "(تحت التحديث)", videoTitle: "مشاهدة الحلقة",
-                burnN: "دولاب الحروق", watchV: "مشاهدة الفيديو", janTitle: "محاضرة شهر يناير", download: "تحميل PDF", rights: "جميع الحقوق محفوظة © 2026"
+                cab: "دواليب الطوارئ", ams: "سياسة صرف المضادات", prot: "البروتوكولات", lec: "المحاضرات الشهرية", search: "ابحث عن بروتوكول أو دواء...",
+                amsHead: "Anti Microbial Stewardship", journey: "مستشفى المضادات والرحلة العظيمة", calc: "حاسبة الجرعات", watch: "مشاهدة الحلقة",
+                burn: "دولاب الحروق", btnWatch: "مشاهدة الفيديو", footer: "جميع الحقوق محفوظة © مستشفى المطرية التعليمي 2026"
             },
             en: {
-                title: "Pharmacy Academy - Mataria Hospital", subtitle: "Continuous Education Portal", langBtn: "العربية", badge: "Pharmacy Excellence",
+                title: "Pharmacy Dept Academy", subtitle: "Medical Education Portal", langBtn: "العربية", badge: "Pharmacy Excellence",
                 heroT: "Learning Platform", heroD: "Unified digital platform for medical training.",
-                cab: "ER Cabinets", ams: "AMS Policy", prot: "Protocols", lec: "Monthly Lectures", searchPlace: "Search protocols or drugs...",
-                amsJourney: "Antimicrobial Journey", amsCalc: "Dose Calculator", amsStatus: "(Updating)", videoTitle: "Watch Episode",
-                burnN: "Burns Cabinet", watchV: "Watch Video", janTitle: "January Lecture", download: "Download PDF", rights: "All Rights Reserved © 2026"
+                cab: "ER Cabinets", ams: "AMS Policy", prot: "Protocols", lec: "Lectures", search: "Search protocols...",
+                amsHead: "AMS Program", journey: "Antimicrobial Journey", calc: "Dose Calc", watch: "Watch Episode",
+                burn: "Burns Cabinet", btnWatch: "Watch Video", footer: "All Rights Reserved © Mataria Hospital 2026"
             }
         };
 
-        const monthsAr = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
-        const monthsEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        
         let currentLang = 'ar';
         let navigationHistory = ['homeSection'];
 
-        // منع الخروج من الموقع عند استخدام زر الرجوع في المتصفح
-        history.pushState({section: 'homeSection'}, "");
-        window.onpopstate = function(event) {
+        // منع الخروج بزر الرجوع
+        history.pushState(null, null, location.href);
+        window.onpopstate = function() {
             if (navigationHistory.length > 1) {
                 goBack();
-                history.pushState({section: navigationHistory[navigationHistory.length-1]}, "");
+                history.pushState(null, null, location.href);
             }
         };
 
@@ -238,78 +263,81 @@
             }
         }
 
-        function playVideo(url) {
-            document.getElementById('videoIframe').src = url;
-            showSection('videoPlayerSection');
-        }
-
         function toggleLanguage() {
             currentLang = currentLang === 'ar' ? 'en' : 'ar';
             const isAr = currentLang === 'ar';
             document.dir = isAr ? 'rtl' : 'ltr';
             const t = translations[currentLang];
 
-            // نصوص رئيسية
+            // ترجمة النصوص
             document.getElementById('site-title').innerText = t.title;
             document.getElementById('site-subtitle').innerText = t.subtitle;
             document.getElementById('langBtnText').innerText = t.langBtn;
             document.getElementById('badge-text').innerText = t.badge;
             document.getElementById('hero-title').innerText = t.heroT;
             document.getElementById('hero-desc').innerText = t.heroD;
-            document.getElementById('mainSearch').placeholder = t.searchPlace;
+            document.getElementById('mainSearch').placeholder = t.search;
             document.getElementById('btn-cabinets').innerText = t.cab;
             document.getElementById('btn-ams').innerText = t.ams;
             document.getElementById('btn-protocols').innerText = t.prot;
             document.getElementById('btn-lectures').innerText = t.lec;
-            document.getElementById('ams-title').innerText = t.ams;
-            document.getElementById('ams-journey-title').innerText = t.amsJourney;
-            document.querySelector('.text-ams-calc').innerText = t.amsCalc;
-            document.querySelector('.ams-status').innerText = t.amsStatus;
-            document.getElementById('video-header-title').innerText = t.videoTitle;
-            document.getElementById('pdf-download-text').innerText = t.download;
-            document.getElementById('footer-rights').innerText = t.rights;
-            document.getElementById('jan-photo-title').innerText = t.janTitle;
-            document.querySelector('.burn-name').innerText = t.burnN;
-            document.querySelector('.watch-video-text').innerText = t.watchV;
+            document.getElementById('ams-title-header').innerText = t.amsHead;
+            document.querySelectorAll('.journey-title-text').forEach(el => el.innerText = t.journey);
+            document.querySelector('.calc-title-text').innerText = t.calc;
+            document.getElementById('prot-main-title').innerText = t.prot;
+            document.querySelector('.vid-watch-text').innerText = t.watch;
+            document.querySelector('.burn-title-text').innerText = t.burn;
+            document.querySelector('.btn-watch-text').innerText = t.btnWatch;
+            document.getElementById('footer-text').innerText = t.footer;
 
             // ضبط المحاذاة والأسهم
-            const textAlignment = isAr ? 'text-right' : 'text-left';
-            document.getElementById('site-title').className = `text-lg md:text-xl font-bold text-gray-900 leading-tight ${textAlignment}`;
-            document.getElementById('site-subtitle').className = `text-xs text-mth-gold font-bold uppercase ${textAlignment}`;
-            document.getElementById('header-text-container').className = `hidden sm:flex flex-col ${textAlignment}`;
+            const align = isAr ? 'text-right' : 'text-left';
+            document.getElementById('main-content').className = `flex-grow max-w-7xl mx-auto px-4 w-full py-8 ${align}`;
+            document.getElementById('header-texts').className = `hidden sm:flex flex-col ${align}`;
+            document.getElementById('site-title').className = `text-lg md:text-xl font-bold text-gray-900 leading-tight ${align}`;
+            document.getElementById('site-subtitle').className = `text-xs text-mth-gold font-bold uppercase ${align}`;
             document.getElementById('backIcon').className = isAr ? 'fas fa-arrow-right text-xl' : 'fas fa-arrow-left text-xl';
             document.querySelector('.nav-arrow').className = isAr ? 'fas fa-chevron-left text-gray-400 nav-arrow' : 'fas fa-chevron-right text-gray-400 nav-arrow';
-            document.getElementById('mainSearch').className = `w-full px-6 py-4 rounded-full border-2 border-gray-100 shadow-sm focus:border-mth-gold focus:outline-none ${textAlignment}`;
+            document.getElementById('mainSearch').className = `w-full px-6 py-4 rounded-full border-2 border-gray-100 shadow-sm focus:border-mth-gold focus:outline-none ${align}`;
 
             renderLectures();
         }
 
         function renderLectures() {
-            const grid = document.getElementById('months-grid');
+            const grid = document.getElementById('lectures-grid');
             grid.innerHTML = '';
-            const list = currentLang === 'ar' ? monthsAr : monthsEn;
-            list.forEach((month, i) => {
-                const div = document.createElement('div');
-                div.className = "bg-white p-4 rounded-2xl border border-gray-100 shadow-sm text-center card-hover";
-                div.onclick = () => (i === 0 ? showSection('januaryPhoto') : alert(translations[currentLang].amsStatus));
-                div.innerHTML = `<i class="fas fa-calendar-day text-blue-500 mb-2"></i><div class="font-bold text-sm">${month}</div>`;
-                grid.appendChild(div);
+            const months = currentLang === 'ar' ? ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"] : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            months.forEach((m, i) => {
+                const d = document.createElement('div');
+                d.className = "bg-white p-4 rounded-2xl border border-gray-100 shadow-sm text-center card-hover";
+                d.onclick = () => (i === 0 ? showSection('januaryPhoto') : alert(currentLang === 'ar' ? 'قريباً' : 'Soon'));
+                d.innerHTML = `<i class="fas fa-calendar-day text-blue-500 mb-2"></i><div class="font-bold text-sm">${m}</div>`;
+                grid.appendChild(d);
             });
+        }
+
+        function playVideo(url) {
+            document.getElementById('videoIframe').src = url;
+            showSection('videoPlayerSection');
         }
 
         function toggleAccordion(id) {
             const el = document.getElementById(id);
-            el.classList.toggle('open');
+            const icon = el.previousElementSibling.querySelector('.fa-chevron-down');
+            const isOpen = el.classList.contains('open');
+            document.querySelectorAll('.protocol-content').forEach(c => c.classList.remove('open'));
+            document.querySelectorAll('.fa-chevron-down').forEach(i => i.style.transform = 'rotate(0deg)');
+            if (!isOpen) { el.classList.add('open'); icon.style.transform = 'rotate(180deg)'; }
         }
 
         function liveSearch() {
             const q = document.getElementById('mainSearch').value.toLowerCase();
             const res = document.getElementById('searchResults');
             if (q.length < 2) { res.classList.add('hidden'); return; }
-            const data = [{t: "HAP Protocol", id: "hap-prot", p: "pneumoniaSection"}];
-            const matches = data.filter(i => i.t.toLowerCase().includes(q));
+            const data = [{t: "Pneumonia - HAP Protocol", id: "hap-prot", p: "pneumoniaSection", k: "vancomycin meropenem linezolid hap"}, {t: "Pneumonia - CAP Protocol", id: "cap-prot", p: "pneumoniaSection", k: "ampicillin clarithromycin cap"}];
+            const matches = data.filter(i => i.t.toLowerCase().includes(q) || i.k.includes(q));
             if (matches.length > 0) {
-                res.innerHTML = matches.map(m => `<div onclick="goToResult('${m.p}', '${m.id}')" class="p-4 hover:bg-gray-50 border-b">${m.t}</div>`).join('');
+                res.innerHTML = matches.map(m => `<div onclick="goToResult('${m.p}', '${m.id}')" class="p-4 hover:bg-gray-50 border-b cursor-pointer">${m.t}</div>`).join('');
                 res.classList.remove('hidden');
             }
         }
@@ -317,7 +345,8 @@
         function goToResult(p, id) {
             showSection(p);
             document.getElementById('searchResults').classList.add('hidden');
-            setTimeout(() => { toggleAccordion(id); document.getElementById(id).scrollIntoView(); }, 300);
+            document.getElementById('mainSearch').value = '';
+            setTimeout(() => { toggleAccordion(id); document.getElementById(id).scrollIntoView({behavior: 'smooth', block: 'center'}); }, 300);
         }
 
         renderLectures();
