@@ -17,8 +17,8 @@
         .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .protocol-card { border-right: 4px solid #2D8B44; transition: all 0.3s; }
         .protocol-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-        .protocol-content.open { max-height: 2000px; transition: max-height 0.5s ease-in; }
-        .line-badge { background: #e5e7eb; color: #374151; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.75rem; }
+        .protocol-content.open { max-height: 2500px; transition: max-height 0.5s ease-in; }
+        .line-badge { background: #e5e7eb; color: #374151; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.75rem; display: inline-block; margin-bottom: 4px; }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -96,13 +96,13 @@
 
         <div id="amsJourneySection" class="hidden-section">
             <h2 id="journey-title" class="text-2xl font-bold text-center mb-8">مستشفى المضادات والرحلة العظيمة</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-                <div class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">1</div>
-                <div class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">2</div>
-                <div class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">3</div>
-                <div class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">4</div>
-                <div class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">5</div>
-                <div class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">6</div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto text-center">
+                <a href="https://drive.google.com/file/d/1kapCfJwWNJ--KAMezjzuwDA0YeaJEtTQ/view?usp=sharing" target="_blank" class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">1</a>
+                <a href="https://drive.google.com/file/d/11zMpJtQ87OLcT7HPpXzPEDmvPL9ggO_k/view?usp=drive_link" target="_blank" class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">2</a>
+                <a href="https://drive.google.com/file/d/11dRO0CxqjRKVeGKggDoGBDPMr5k7D2-N/view?usp=drive_link" target="_blank" class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">3</a>
+                <div onclick="alert('قريباً')" class="w-24 h-24 mx-auto rounded-full bg-gray-400 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">4</div>
+                <div onclick="alert('قريباً')" class="w-24 h-24 mx-auto rounded-full bg-gray-400 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">5</div>
+                <div onclick="alert('قريباً')" class="w-24 h-24 mx-auto rounded-full bg-gray-400 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">6</div>
             </div>
         </div>
 
@@ -169,14 +169,31 @@
             </div>
             
             <div class="max-w-4xl mx-auto space-y-4">
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden protocol-card">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden protocol-card" style="border-right-color: #2563eb;">
                     <div onclick="toggleAccordion('hap-prot')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
                         <div class="flex items-center gap-3"><i class="fas fa-hospital text-blue-600"></i><span class="font-bold text-lg">Nosocomial Pneumonia (HAP)</span></div>
                         <i class="fas fa-chevron-down text-gray-400"></i>
                     </div>
                     <div id="hap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
-                        <div class="bg-blue-50 p-3 rounded-lg"><h4 class="font-bold text-blue-800 mb-2 underline">No risk factors for MDR:</h4><p>Ceftazidime, Cefepime, or Pip/Tazo</p></div>
-                        <div class="bg-red-50 p-3 rounded-lg"><h4 class="font-bold text-red-800 mb-2 underline">With risk factors:</h4><p>Meropenem + Quinolone/Amikacin + Anti-MRSA</p></div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-blue-800 mb-2 underline">NO risk factors for MDR:</h4>
+                            <p class="mb-2"><span class="line-badge">1ST line</span> Ceftazidime 1-2g/8hr OR Cefepime 2g/8-12hr OR Pip/Tazo 4.5g/6hr</p>
+                            <p class="mb-2"><span class="line-badge">2nd line</span> Meropenem 1g/8hr</p>
+                            <div class="mt-3 p-2 bg-white border border-blue-200 rounded">
+                                <span class="font-bold text-red-600">ADD anti-MRSA if risks present:</span><br>
+                                1st: Vancomycin (15-20mg/kg/8-12hr) | 2nd: Linezolid (600mg/12hr) | 3rd: Teicoplanin
+                            </div>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-red-800 mb-2 underline">WITH risk factors for MDR:</h4>
+                            <p class="text-xs italic mb-2">(Ventilatory support, Septic shock, IV Abx past 90 days)</p>
+                            <p class="mb-2"><span class="line-badge">1ST line</span> Meropenem 1g/8hr | <span class="line-badge">2nd line</span> Imipenem-cilastatin 500mg/6hrs</p>
+                            <p class="font-bold text-blue-700 mt-2">+ PLUS:</p>
+                            <p>Antipseudomonal fluoroquinolone (Levo / Cipro 400mg/8hr) OR Aminoglycosides (Amikacin)</p>
+                            <p class="font-bold text-red-700 mt-2">+ PLUS Anti-MRSA:</p>
+                            <p>Vancomycin (1st) OR Linezolid (2nd)</p>
+                            <p class="mt-2 font-bold italic">Duration: 7-14 days</p>
+                        </div>
                     </div>
                 </div>
 
@@ -186,17 +203,49 @@
                         <i class="fas fa-chevron-down text-gray-400"></i>
                     </div>
                     <div id="vap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
-                        <div class="bg-purple-50 p-3 rounded-lg"><h4 class="font-bold text-purple-800 mb-2 underline">MDR Risk Factors:</h4><p>Meropenem + Antipseudomonal + Anti-MRSA</p></div>
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-purple-800 mb-2 underline">NO risk factors for MDR:</h4>
+                            <p>Same as HAP No-risk protocol (Ceftazidime, Cefepime, or Pip/Tazo)</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-red-800 mb-2 underline">WITH risk factors for MDR:</h4>
+                            <p class="text-xs italic mb-2">(ARDS, Septic shock, IV Abx past 90 days, ≥5 days hosp, Acute RRT)</p>
+                            <p class="mb-2"><span class="line-badge">1ST line</span> Meropenem 1g/8hr | <span class="line-badge">2nd line</span> Imipenem 500mg/6hrs</p>
+                            <p class="font-bold text-blue-700">+ PLUS:</p>
+                            <p>Fluoroquinolone (Levo/Cipro) OR Aminoglycosides (Amikacin)</p>
+                            <p class="font-bold text-red-700 mt-2">+ PLUS Anti-MRSA:</p>
+                            <p>Vancomycin (1st) OR Linezolid (2nd)</p>
+                            <p class="mt-2 font-bold italic">Duration: 7-14 days</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden protocol-card" style="border-right-color: #2563eb;">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden protocol-card" style="border-right-color: #059669;">
                     <div onclick="toggleAccordion('cap-prot')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
-                        <div class="flex items-center gap-3"><i class="fas fa-users text-blue-500"></i><span class="font-bold text-lg">Community Acquired (CAP)</span></div>
+                        <div class="flex items-center gap-3"><i class="fas fa-users text-emerald-600"></i><span class="font-bold text-lg">Community Acquired (CAP)</span></div>
                         <i class="fas fa-chevron-down text-gray-400"></i>
                     </div>
                     <div id="cap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
-                        <div class="bg-green-50 p-3 rounded-lg"><h4 class="font-bold text-green-800 mb-2">Non-severe:</h4><p>Ceftriaxone + Clarithromycin</p></div>
+                        <div class="bg-emerald-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-emerald-800 mb-2 underline">Non-severe & No MRSA/Ps risk:</h4>
+                            <p class="mb-1"><span class="line-badge">1st Line</span> Ampicillin-sulbactam 3g/6hr + Clarithromycin 500mg/12hr</p>
+                            <p class="mb-1">OR Cefotaxime 1-2g/8hr / Ceftriaxone 1g/24hr + Clarithromycin</p>
+                            <p class="mt-2"><span class="line-badge">2nd Line</span> Moxifloxacin 400mg once OR Levofloxacin 750mg once</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-yellow-800 mb-2 underline">Severe with No MRSA/Ps risk:</h4>
+                            <p><span class="line-badge">1st Line</span> (Ampicillin-sulbactam OR Cefotaxime OR Ceftriaxone) PLUS (Clarithromycin OR Moxifloxacin OR Levofloxacin)</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-red-800 mb-2 underline">Risk of Pseudomonas & MRSA:</h4>
+                            <p class="mb-1"><span class="line-badge">1st Line</span> Ceftazidime 1-2g/8hr OR Cefepime 1-2g/8-12hr</p>
+                            <p class="mb-1"><span class="line-badge">2nd Line</span> Pip/Tazo 4.5g/6hr OR Meropenem 1g/8hr</p>
+                            <p class="font-bold mt-2 text-blue-700">+ PLUS (Pseudomonas coverage):</p>
+                            <p>Levofloxacin 750mg OR Amikacin 15mg/kg (+ Azithromycin 500mg if Amikacin used)</p>
+                            <p class="font-bold mt-2 text-red-700">+ PLUS (MRSA coverage):</p>
+                            <p>Vancomycin (15-20mg/kg/8-12hr) OR Linezolid OR Teicoplanin</p>
+                            <p class="mt-2 font-bold italic">Duration: 5-7 days</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -288,11 +337,13 @@
             const content = document.getElementById(id);
             const icon = content.previousElementSibling.querySelector('.fa-chevron-down');
             const isOpen = content.classList.contains('open');
-            document.querySelectorAll('.protocol-content').forEach(c => c.classList.remove('open'));
-            document.querySelectorAll('.fa-chevron-down').forEach(i => i.style.transform = 'rotate(0deg)');
+            
             if (!isOpen) {
                 content.classList.add('open');
                 icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.remove('open');
+                icon.style.transform = 'rotate(0deg)';
             }
         }
     </script>
