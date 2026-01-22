@@ -19,6 +19,7 @@
         .protocol-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
         .protocol-content.open { max-height: 2500px; transition: max-height 0.5s ease-in; }
         .line-badge { background: #e5e7eb; color: #374151; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.75rem; display: inline-block; margin-bottom: 4px; }
+        #searchResults { max-height: 300px; overflow-y: auto; }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -34,7 +35,7 @@
                     <div class="h-10 w-px bg-gray-200 mx-1"></div>
                     <img src="https://i.postimg.cc/k4jRp76m/clinical.png" alt="Logo 2" class="h-12 md:h-16 w-auto">
                 </div>
-                <div class="hidden sm:flex flex-col">
+                <div class="hidden sm:flex flex-col text-right">
                     <h1 id="site-title" class="text-lg md:text-xl font-bold text-gray-900 leading-tight">أكاديمية قسم الصيدلية - مستشفى المطرية التعليمي</h1>
                     <span id="site-subtitle" class="text-xs text-mth-gold font-bold uppercase">بوابة التعليم الطبي المستمر</span>
                 </div>
@@ -55,19 +56,24 @@
                 <p id="hero-desc" class="max-w-2xl mx-auto text-gray-500 text-lg">المنصة الرقمية الموحدة للتدريب والتعليم المستمر لجميع الكوادر الطبية والصيادلة.</p>
             </section>
 
+            <div class="max-w-md mx-auto mb-10 relative">
+                <div class="relative">
+                    <input type="text" id="mainSearch" onkeyup="liveSearch()" placeholder="ابحث عن بروتوكول أو دواء (مثلاً: CAP أو Vancomycin)" 
+                           class="w-full px-6 py-4 rounded-full border-2 border-gray-100 shadow-sm focus:border-mth-gold focus:outline-none text-right">
+                    <i class="fas fa-search absolute left-6 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                </div>
+                <div id="searchResults" class="absolute z-50 w-full bg-white mt-2 rounded-2xl shadow-xl hidden overflow-hidden border border-gray-100 text-right"></div>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div onclick="showSection('cabinetsSection')" class="bg-white p-6 rounded-[2rem] shadow-lg border-2 border-gray-50 flex flex-col items-center gap-4 card-hover">
                     <div class="w-16 h-16 rounded-2xl bg-mth-gold flex items-center justify-center text-2xl text-white shadow-lg"><i class="fas fa-briefcase-medical"></i></div>
                     <div><span id="btn-cabinets" class="text-xl font-black block text-mth-gold">دواليب الطوارئ</span></div>
                 </div>
-                
                 <div onclick="showSection('amsSection')" class="bg-white p-6 rounded-[2rem] shadow-lg border-2 border-gray-50 flex flex-col items-center gap-4 card-hover">
-                    <div class="w-16 h-16 rounded-2xl bg-purple-600 flex items-center justify-center text-2xl text-white shadow-lg">
-                        <i class="fas fa-capsules"></i>
-                    </div>
+                    <div class="w-16 h-16 rounded-2xl bg-purple-600 flex items-center justify-center text-2xl text-white shadow-lg"><i class="fas fa-capsules"></i></div>
                     <div><span id="btn-ams" class="text-xl font-black block text-purple-700">سياسة صرف المضادات</span></div>
                 </div>
-
                 <div onclick="showSection('protocolsSection')" class="bg-white p-6 rounded-[2rem] shadow-lg border-2 border-gray-50 flex flex-col items-center gap-4 card-hover">
                     <div class="w-16 h-16 rounded-2xl bg-green-600 flex items-center justify-center text-2xl text-white shadow-lg"><i class="fas fa-scroll"></i></div>
                     <div><span id="btn-protocols" class="text-xl font-black block text-green-700">البروتوكولات</span></div>
@@ -79,8 +85,8 @@
             </div>
         </div>
 
-        <div id="amsSection" class="hidden-section">
-            <h2 id="ams-title" class="text-3xl font-bold text-center mb-10">Anti Microbial Stewardship</h2>
+        <div id="amsSection" class="hidden-section text-center">
+            <h2 id="ams-title" class="text-3xl font-bold mb-10">Anti Microbial Stewardship</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <div onclick="showSection('amsJourneySection')" class="p-8 bg-blue-50 rounded-3xl border-2 border-blue-200 text-center card-hover">
                     <i class="fas fa-pills text-5xl text-blue-500 mb-4"></i>
@@ -94,55 +100,26 @@
             </div>
         </div>
 
-        <div id="amsJourneySection" class="hidden-section">
-            <h2 id="journey-title" class="text-2xl font-bold text-center mb-8">مستشفى المضادات والرحلة العظيمة</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto text-center">
-                <a href="https://drive.google.com/file/d/1kapCfJwWNJ--KAMezjzuwDA0YeaJEtTQ/view?usp=sharing" target="_blank" class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">1</a>
-                <a href="https://drive.google.com/file/d/11zMpJtQ87OLcT7HPpXzPEDmvPL9ggO_k/view?usp=drive_link" target="_blank" class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">2</a>
-                <a href="https://drive.google.com/file/d/11dRO0CxqjRKVeGKggDoGBDPMr5k7D2-N/view?usp=drive_link" target="_blank" class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">3</a>
-                <div onclick="alert('قريباً')" class="w-24 h-24 mx-auto rounded-full bg-gray-400 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">4</div>
-                <div onclick="alert('قريباً')" class="w-24 h-24 mx-auto rounded-full bg-gray-400 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">5</div>
-                <div onclick="alert('قريباً')" class="w-24 h-24 mx-auto rounded-full bg-gray-400 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">6</div>
+        <div id="amsJourneySection" class="hidden-section text-center">
+            <h2 id="journey-title" class="text-2xl font-bold mb-8 text-blue-800">مستشفى المضادات والرحلة العظيمة</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+                <div onclick="playVideo('https://drive.google.com/file/d/1kapCfJwWNJ--KAMezjzuwDA0YeaJEtTQ/preview')" class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">1</div>
+                <div onclick="playVideo('https://drive.google.com/file/d/11zMpJtQ87OLcT7HPpXzPEDmvPL9ggO_k/preview')" class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">2</div>
+                <div onclick="playVideo('https://drive.google.com/file/d/11dRO0CxqjRKVeGKggDoGBDPMr5k7D2-N/preview')" class="w-24 h-24 mx-auto rounded-full bg-blue-600 flex items-center justify-center text-3xl text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-lg">3</div>
+                <div onclick="alert('قريباً')" class="w-24 h-24 mx-auto rounded-full bg-gray-300 flex items-center justify-center text-3xl text-white font-bold shadow-lg">4</div>
+                <div onclick="alert('قريباً')" class="w-24 h-24 mx-auto rounded-full bg-gray-300 flex items-center justify-center text-3xl text-white font-bold shadow-lg">5</div>
+                <div onclick="alert('قريباً')" class="w-24 h-24 mx-auto rounded-full bg-gray-300 flex items-center justify-center text-3xl text-white font-bold shadow-lg">6</div>
             </div>
         </div>
 
-        <div id="lecturesSection" class="hidden-section">
-            <h2 id="lec-title" class="text-3xl font-bold text-center mb-10">المحاضرات الشهرية</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-                <script>
-                    const monthsAr = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
-                    const monthsEn = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                    for(let i=0; i<12; i++) {
-                        document.write(`
-                            <div onclick="${i === 0 ? "showSection('januaryPhoto')" : "alert('قريباً') "}" class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm text-center card-hover">
-                                <i class="fas fa-calendar-day text-blue-500 mb-2"></i>
-                                <div class="font-bold text-sm month-name" data-ar="${monthsAr[i]}" data-en="${monthsEn[i]}">${monthsAr[i]}</div>
-                            </div>
-                        `);
-                    }
-                </script>
-            </div>
-        </div>
-
-        <div id="januaryPhoto" class="hidden-section text-center">
-            <h2 class="text-2xl font-bold mb-6">محاضرة شهر يناير</h2>
-            <img src="https://lh3.googleusercontent.com/d/1yP44Mpmk4IRSbad16mqR5gx5dqYxI6lf" alt="January Lecture" class="max-w-full md:max-w-2xl mx-auto rounded-xl shadow-2xl border-4 border-white">
-        </div>
-
-        <div id="cabinetsSection" class="hidden-section">
-            <h2 id="cab-title" class="text-3xl font-bold text-center mb-10 text-mth-gold">دواليب الطوارئ</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div class="p-8 bg-orange-50 rounded-3xl border-2 border-orange-200 text-center">
-                    <i class="fas fa-fire text-5xl text-orange-500 mb-4"></i>
-                    <h3 id="burn-cab-name" class="text-2xl font-bold mb-4">دولاب الحروق</h3>
-                    <a href="https://drive.google.com/file/d/1E2YYiG68zHqS_3jHUoPMc0QsYvV-8mph/view" target="_blank" class="inline-flex items-center gap-2 px-8 py-3 bg-orange-500 text-white rounded-full font-bold shadow-md hover:bg-orange-600">
-                        <i class="fas fa-play-circle"></i> <span id="burn-btn-text">اضغط هنا لمشاهدة الفيديو</span>
-                    </a>
+        <div id="videoPlayerSection" class="hidden-section">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-blue-700">مشاهدة الحلقة</h2>
+                    <button onclick="goBack()" class="bg-red-100 text-red-600 px-4 py-1 rounded-full text-sm font-bold">إغلاق X</button>
                 </div>
-                <div class="p-8 bg-red-50 rounded-3xl border-2 border-red-200 text-center">
-                    <i class="fas fa-heartbeat text-5xl text-red-500 mb-4"></i>
-                    <h3 id="er-cab-name" class="text-2xl font-bold mb-4">دولاب الكوارث</h3>
-                    <p id="er-cab-desc" class="text-gray-600">قريباً: شرح تفصيلي لمحتويات دولاب الطوارئ</p>
+                <div class="relative pb-[56.25%] h-0 overflow-hidden rounded-2xl shadow-2xl border-4 border-white bg-black">
+                    <iframe id="videoIframe" class="absolute top-0 left-0 w-full h-full" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -163,7 +140,7 @@
         <div id="pneumoniaSection" class="hidden-section">
             <div class="max-w-4xl mx-auto flex justify-between items-center mb-8">
                 <h2 class="text-3xl font-bold text-green-700">Pneumonia Protocols</h2>
-                <a href="https://drive.google.com/file/d/1Epry7pCQZmPwfVjUv_h9tHqYzwuJTlID/view" target="_blank" class="bg-red-500 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 shadow hover:bg-red-600">
+                <a href="https://drive.google.com/file/d/1Epry7pCQZmPwfVjUv_h9tHqYzwuJTlID/view" target="_blank" class="bg-red-500 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 shadow">
                     <i class="fas fa-file-pdf"></i> <span id="pdf-download-text">تحميل PDF</span>
                 </a>
             </div>
@@ -171,85 +148,73 @@
             <div class="max-w-4xl mx-auto space-y-4">
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden protocol-card" style="border-right-color: #2563eb;">
                     <div onclick="toggleAccordion('hap-prot')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
-                        <div class="flex items-center gap-3"><i class="fas fa-hospital text-blue-600"></i><span class="font-bold text-lg">Nosocomial Pneumonia (HAP)</span></div>
+                        <div class="flex items-center gap-3 text-right"><i class="fas fa-hospital text-blue-600"></i><span class="font-bold text-lg">Nosocomial Pneumonia (HAP)</span></div>
                         <i class="fas fa-chevron-down text-gray-400"></i>
                     </div>
-                    <div id="hap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
+                    <div id="hap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4 text-right">
                         <div class="bg-blue-50 p-4 rounded-lg">
                             <h4 class="font-bold text-blue-800 mb-2 underline">NO risk factors for MDR:</h4>
                             <p class="mb-2"><span class="line-badge">1ST line</span> Ceftazidime 1-2g/8hr OR Cefepime 2g/8-12hr OR Pip/Tazo 4.5g/6hr</p>
                             <p class="mb-2"><span class="line-badge">2nd line</span> Meropenem 1g/8hr</p>
-                            <div class="mt-3 p-2 bg-white border border-blue-200 rounded">
-                                <span class="font-bold text-red-600">ADD anti-MRSA if risks present:</span><br>
-                                1st: Vancomycin (15-20mg/kg/8-12hr) | 2nd: Linezolid (600mg/12hr) | 3rd: Teicoplanin
+                            <div class="mt-3 p-2 bg-white border border-blue-200 rounded text-red-600 font-bold">
+                                ADD anti-MRSA if risks: Vancomycin (1st) | Linezolid (2nd) | Teicoplanin (3rd)
                             </div>
                         </div>
                         <div class="bg-red-50 p-4 rounded-lg">
                             <h4 class="font-bold text-red-800 mb-2 underline">WITH risk factors for MDR:</h4>
-                            <p class="text-xs italic mb-2">(Ventilatory support, Septic shock, IV Abx past 90 days)</p>
-                            <p class="mb-2"><span class="line-badge">1ST line</span> Meropenem 1g/8hr | <span class="line-badge">2nd line</span> Imipenem-cilastatin 500mg/6hrs</p>
-                            <p class="font-bold text-blue-700 mt-2">+ PLUS:</p>
-                            <p>Antipseudomonal fluoroquinolone (Levo / Cipro 400mg/8hr) OR Aminoglycosides (Amikacin)</p>
-                            <p class="font-bold text-red-700 mt-2">+ PLUS Anti-MRSA:</p>
-                            <p>Vancomycin (1st) OR Linezolid (2nd)</p>
-                            <p class="mt-2 font-bold italic">Duration: 7-14 days</p>
+                            <p class="mb-2"><span class="line-badge">1ST line</span> Meropenem 1g/8h | <span class="line-badge">2nd line</span> Imipenem 500mg/6hrs</p>
+                            <p class="font-bold mt-2">+ PLUS Quinolone (Levo/Cipro) OR Amikacin</p>
+                            <p class="font-bold mt-2 text-red-700">+ PLUS Anti-MRSA (Vancomycin or Linezolid)</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden protocol-card" style="border-right-color: #6D28D9;">
                     <div onclick="toggleAccordion('vap-prot')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
-                        <div class="flex items-center gap-3"><i class="fas fa-fan text-purple-600"></i><span class="font-bold text-lg">Nosocomial Pneumonia (VAP)</span></div>
+                        <div class="flex items-center gap-3 text-right"><i class="fas fa-fan text-purple-600"></i><span class="font-bold text-lg">Nosocomial Pneumonia (VAP)</span></div>
                         <i class="fas fa-chevron-down text-gray-400"></i>
                     </div>
-                    <div id="vap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
+                    <div id="vap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4 text-right">
                         <div class="bg-purple-50 p-4 rounded-lg">
-                            <h4 class="font-bold text-purple-800 mb-2 underline">NO risk factors for MDR:</h4>
-                            <p>Same as HAP No-risk protocol (Ceftazidime, Cefepime, or Pip/Tazo)</p>
+                            <h4 class="font-bold text-purple-800 mb-2">NO MDR risk factors:</h4>
+                            <p>Same as HAP No-risk line (Ceftazidime, Cefepime, or Pip/Tazo)</p>
                         </div>
                         <div class="bg-red-50 p-4 rounded-lg">
-                            <h4 class="font-bold text-red-800 mb-2 underline">WITH risk factors for MDR:</h4>
-                            <p class="text-xs italic mb-2">(ARDS, Septic shock, IV Abx past 90 days, ≥5 days hosp, Acute RRT)</p>
-                            <p class="mb-2"><span class="line-badge">1ST line</span> Meropenem 1g/8hr | <span class="line-badge">2nd line</span> Imipenem 500mg/6hrs</p>
-                            <p class="font-bold text-blue-700">+ PLUS:</p>
-                            <p>Fluoroquinolone (Levo/Cipro) OR Aminoglycosides (Amikacin)</p>
-                            <p class="font-bold text-red-700 mt-2">+ PLUS Anti-MRSA:</p>
-                            <p>Vancomycin (1st) OR Linezolid (2nd)</p>
-                            <p class="mt-2 font-bold italic">Duration: 7-14 days</p>
+                            <h4 class="font-bold text-red-800 mb-2 underline">WITH MDR risk factors:</h4>
+                            <p class="text-xs mb-2 italic">(ARDS, Septic shock, IV Abx past 90d, etc.)</p>
+                            <p><span class="line-badge">1ST line</span> Meropenem | <span class="line-badge">2nd line</span> Imipenem</p>
+                            <p class="mt-2">+ PLUS Antipseudomonal OR Amikacin</p>
+                            <p class="mt-2 text-red-700">+ PLUS Anti-MRSA (Vancomycin or Linezolid)</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden protocol-card" style="border-right-color: #059669;">
                     <div onclick="toggleAccordion('cap-prot')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
-                        <div class="flex items-center gap-3"><i class="fas fa-users text-emerald-600"></i><span class="font-bold text-lg">Community Acquired (CAP)</span></div>
+                        <div class="flex items-center gap-3 text-right"><i class="fas fa-users text-emerald-600"></i><span class="font-bold text-lg">Community Acquired (CAP)</span></div>
                         <i class="fas fa-chevron-down text-gray-400"></i>
                     </div>
-                    <div id="cap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
+                    <div id="cap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4 text-right">
                         <div class="bg-emerald-50 p-4 rounded-lg">
-                            <h4 class="font-bold text-emerald-800 mb-2 underline">Non-severe & No MRSA/Ps risk:</h4>
-                            <p class="mb-1"><span class="line-badge">1st Line</span> Ampicillin-sulbactam 3g/6hr + Clarithromycin 500mg/12hr</p>
-                            <p class="mb-1">OR Cefotaxime 1-2g/8hr / Ceftriaxone 1g/24hr + Clarithromycin</p>
-                            <p class="mt-2"><span class="line-badge">2nd Line</span> Moxifloxacin 400mg once OR Levofloxacin 750mg once</p>
+                            <h4 class="font-bold mb-2">Non-severe:</h4>
+                            <p><span class="line-badge">1st</span> Ampicillin-sulbactam + Clarithromycin OR Ceftriaxone + Clarithromycin</p>
                         </div>
                         <div class="bg-yellow-50 p-4 rounded-lg">
-                            <h4 class="font-bold text-yellow-800 mb-2 underline">Severe with No MRSA/Ps risk:</h4>
-                            <p><span class="line-badge">1st Line</span> (Ampicillin-sulbactam OR Cefotaxime OR Ceftriaxone) PLUS (Clarithromycin OR Moxifloxacin OR Levofloxacin)</p>
+                            <h4 class="font-bold mb-2">Severe:</h4>
+                            <p>(Ampicillin-sulbactam OR Ceftriaxone) PLUS (Clarithromycin OR Moxi/Levo)</p>
                         </div>
                         <div class="bg-red-50 p-4 rounded-lg">
-                            <h4 class="font-bold text-red-800 mb-2 underline">Risk of Pseudomonas & MRSA:</h4>
-                            <p class="mb-1"><span class="line-badge">1st Line</span> Ceftazidime 1-2g/8hr OR Cefepime 1-2g/8-12hr</p>
-                            <p class="mb-1"><span class="line-badge">2nd Line</span> Pip/Tazo 4.5g/6hr OR Meropenem 1g/8hr</p>
-                            <p class="font-bold mt-2 text-blue-700">+ PLUS (Pseudomonas coverage):</p>
-                            <p>Levofloxacin 750mg OR Amikacin 15mg/kg (+ Azithromycin 500mg if Amikacin used)</p>
-                            <p class="font-bold mt-2 text-red-700">+ PLUS (MRSA coverage):</p>
-                            <p>Vancomycin (15-20mg/kg/8-12hr) OR Linezolid OR Teicoplanin</p>
-                            <p class="mt-2 font-bold italic">Duration: 5-7 days</p>
+                            <h4 class="font-bold mb-2 underline">Pseudomonas & MRSA Risk:</h4>
+                            <p><span class="line-badge">1st</span> Ceftazidime or Cefepime | <span class="line-badge">2nd</span> Pip/Tazo or Meropenem</p>
+                            <p class="mt-2 font-bold">+ PLUS (Levo OR Amikacin+Azithro) PLUS (Vancomycin OR Linezolid OR Teicoplanin)</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div id="lecturesSection" class="hidden-section text-center"><h2 class="text-3xl font-bold mb-10">المحاضرات الشهرية</h2><div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"><script>const monthsAr = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"]; for(let i=0; i<12; i++) { document.write(`<div onclick="${i === 0 ? "showSection('januaryPhoto')" : "alert('قريباً') "}" class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm text-center card-hover"><i class="fas fa-calendar-day text-blue-500 mb-2"></i><div class="font-bold text-sm month-name" data-ar="${monthsAr[i]}" data-en="Month">${monthsAr[i]}</div></div>`); }</script></div></div>
+        <div id="cabinetsSection" class="hidden-section text-center"><h2 class="text-3xl font-bold mb-10 text-mth-gold">دواليب الطوارئ</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"><div class="p-8 bg-orange-50 rounded-3xl border-2 border-orange-200"><i class="fas fa-fire text-5xl text-orange-500 mb-4"></i><h3 class="text-2xl font-bold mb-4 text-right">دولاب الحروق</h3><a href="https://drive.google.com/file/d/1E2YYiG68zHqS_3jHUoPMc0QsYvV-8mph/view" target="_blank" class="inline-flex items-center gap-2 px-8 py-3 bg-orange-500 text-white rounded-full font-bold shadow-md">مشاهدة الفيديو</a></div><div class="p-8 bg-red-50 rounded-3xl border-2 border-red-200"><i class="fas fa-heartbeat text-5xl text-red-500 mb-4"></i><h3 class="text-2xl font-bold mb-4 text-right">دولاب الكوارث</h3><p class="text-gray-600">قريباً</p></div></div></div>
 
     </main>
 
@@ -259,61 +224,12 @@
 
     <script>
         const translations = {
-            ar: {
-                title: "أكاديمية قسم الصيدلية - مستشفى المطرية التعليمي", subtitle: "بوابة التعليم الطبي المستمر",
-                langBtn: "English", badge: "التميز في التعليم الصيدلي", heroT: "المنصة التعليمية لقسم الصيدلية",
-                heroD: "المنصة الرقمية الموحدة للتدريب والتعليم المستمر لجميع الكوادر الطبية والصيادلة.",
-                cab: "دواليب الطوارئ", ams: "سياسة صرف المضادات الحيوية", prot: "البروتوكولات", lec: "المحاضرات الشهرية",
-                amsJourney: "مستشفى المضادات والرحلة العظيمة", amsCalc: "حاسبة الجرعات", amsCalcStatus: "(تحت التحديث)",
-                burnN: "دولاب الحروق", burnB: "اضغط هنا لمشاهدة الفيديو", updating: "هذه الميزة تحت التحديث حالياً",
-                rights: "جميع الحقوق محفوظة © مستشفى المطرية التعليمي 2026", erN: "دولاب الكوارث", erD: "قريباً: شرح تفصيلي لمحتويات دولاب الطوارئ", 
-                protSec: "البروتوكولات الطبية 2026", pneumonia: "Pneumonia", download: "تحميل PDF"
-            },
-            en: {
-                title: "Pharmacy Dept Academy - Mataria Hospital", subtitle: "Medical Education Portal",
-                langBtn: "العربية", badge: "Excellence in Pharmacy Education", heroT: "Pharmacy Learning Platform",
-                heroD: "Unified digital platform for continuous training of all medical staff and pharmacists.",
-                cab: "Emergency Cabinets", ams: "Anti Microbial Stewardship", prot: "Protocols", lec: "Monthly Lectures",
-                amsJourney: "Antimicrobial Hospital & Great Journey", amsCalc: "Dose Calculator", amsCalcStatus: "(Under Update)",
-                burnN: "Burns Cabinet", burnB: "Click here for video", updating: "This feature is currently under update",
-                rights: "All Rights Reserved © Mataria Teaching Hospital 2026", erN: "ER Cabinet", erD: "Coming Soon: Detailed ER cabinet contents", 
-                protSec: "Medical Protocols 2026", pneumonia: "Pneumonia", download: "Download PDF"
-            }
+            ar: { title: "أكاديمية قسم الصيدلية - مستشفى المطرية التعليمي", subtitle: "بوابة التعليم الطبي المستمر", langBtn: "English", badge: "التميز في التعليم الصيدلي", heroT: "المنصة التعليمية لقسم الصيدلية", heroD: "المنصة الرقمية الموحدة للتدريب والتعليم المستمر لجميع الكوادر الطبية والصيادلة.", cab: "دواليب الطوارئ", ams: "سياسة صرف المضادات الحيوية", prot: "البروتوكولات", lec: "المحاضرات الشهرية", amsJourney: "مستشفى المضادات والرحلة العظيمة", amsCalc: "حاسبة الجرعات", amsCalcStatus: "(تحت التحديث)", rights: "جميع الحقوق محفوظة © مستشفى المطرية التعليمي 2026", pneumonia: "Pneumonia", download: "تحميل PDF" },
+            en: { title: "Pharmacy Dept Academy", subtitle: "Medical Education Portal", langBtn: "العربية", badge: "Pharmacy Education Excellence", heroT: "Learning Platform", heroD: "Unified digital platform for continuous medical training.", cab: "ER Cabinets", ams: "AMS Policy", prot: "Protocols", lec: "Lectures", amsJourney: "AMS Journey", amsCalc: "Dose Calc", amsCalcStatus: "(Updating)", rights: "All Rights Reserved © 2026", pneumonia: "Pneumonia", download: "Download PDF" }
         };
 
         let currentLang = 'ar';
         let navigationHistory = ['homeSection'];
-
-        function toggleLanguage() {
-            currentLang = currentLang === 'ar' ? 'en' : 'ar';
-            document.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-            const t = translations[currentLang];
-            
-            document.getElementById('site-title').innerText = t.title;
-            document.getElementById('site-subtitle').innerText = t.subtitle;
-            document.getElementById('langBtnText').innerText = t.langBtn;
-            document.getElementById('badge-text').innerText = t.badge;
-            document.getElementById('hero-title').innerText = t.heroT;
-            document.getElementById('hero-desc').innerText = t.heroD;
-            document.getElementById('btn-cabinets').innerText = t.cab;
-            document.getElementById('btn-ams').innerText = t.ams;
-            document.getElementById('btn-protocols').innerText = t.prot;
-            document.getElementById('btn-lectures').innerText = t.lec;
-            document.getElementById('ams-title').innerText = currentLang === 'ar' ? "سياسة صرف المضادات الحيوية" : "Anti Microbial Stewardship";
-            document.getElementById('ams-journey-title').innerText = t.amsJourney;
-            document.getElementById('ams-calc-title').innerText = t.amsCalc;
-            document.getElementById('ams-calc-status').innerText = t.amsCalcStatus;
-            document.getElementById('lec-title').innerText = t.lec;
-            document.getElementById('pneumonia-btn').innerText = t.pneumonia;
-            document.getElementById('pdf-download-text').innerText = t.download;
-            document.getElementById('footer-rights').innerText = t.rights;
-            
-            document.querySelectorAll('.month-name').forEach(el => {
-                el.innerText = el.getAttribute(`data-${currentLang}`);
-            });
-
-            document.getElementById('backIcon').className = currentLang === 'ar' ? 'fas fa-arrow-right text-xl' : 'fas fa-arrow-left text-xl';
-        }
 
         function showSection(id) {
             document.querySelectorAll('main > div').forEach(d => d.classList.add('hidden-section'));
@@ -323,9 +239,15 @@
             window.scrollTo(0,0);
         }
 
+        function playVideo(url) {
+            document.getElementById('videoIframe').src = url;
+            showSection('videoPlayerSection');
+        }
+
         function goBack() {
             if (navigationHistory.length > 1) {
-                navigationHistory.pop();
+                const currentSection = navigationHistory.pop();
+                if (currentSection === 'videoPlayerSection') document.getElementById('videoIframe').src = '';
                 const prevSection = navigationHistory[navigationHistory.length - 1];
                 document.querySelectorAll('main > div').forEach(d => d.classList.add('hidden-section'));
                 document.getElementById(prevSection).classList.remove('hidden-section');
@@ -336,15 +258,66 @@
         function toggleAccordion(id) {
             const content = document.getElementById(id);
             const icon = content.previousElementSibling.querySelector('.fa-chevron-down');
-            const isOpen = content.classList.contains('open');
-            
-            if (!isOpen) {
+            if (!content.classList.contains('open')) {
                 content.classList.add('open');
                 icon.style.transform = 'rotate(180deg)';
             } else {
                 content.classList.remove('open');
                 icon.style.transform = 'rotate(0deg)';
             }
+        }
+
+        // ميزة البحث الذكية
+        function liveSearch() {
+            const query = document.getElementById('mainSearch').value.toLowerCase();
+            const resultsContainer = document.getElementById('searchResults');
+            if (query.length < 2) { resultsContainer.classList.add('hidden'); return; }
+
+            const data = [
+                { title: "Nosocomial Pneumonia (HAP)", id: "hap-prot", parent: "pneumoniaSection", keywords: "vancomycin linezolid meropenem mdr hap" },
+                { title: "Nosocomial Pneumonia (VAP)", id: "vap-prot", parent: "pneumoniaSection", keywords: "ventilator ards amikacin meropenem vap" },
+                { title: "Community Acquired (CAP)", id: "cap-prot", parent: "pneumoniaSection", keywords: "ceftriaxone clarithromycin moxifloxacin cap" }
+            ];
+
+            const matches = data.filter(item => item.title.toLowerCase().includes(query) || item.keywords.toLowerCase().includes(query));
+
+            if (matches.length > 0) {
+                resultsContainer.innerHTML = matches.map(item => `
+                    <div onclick="goToResult('${item.parent}', '${item.id}')" class="p-4 hover:bg-gray-50 cursor-pointer border-b border-gray-50 last:border-0">
+                        <div class="font-bold text-gray-800">${item.title}</div>
+                        <div class="text-xs text-gray-400">انتقال سريع لبروتوكول الرئة</div>
+                    </div>`).join('');
+                resultsContainer.classList.remove('hidden');
+            } else {
+                resultsContainer.innerHTML = '<div class="p-4 text-gray-400 text-sm">لا توجد نتائج</div>';
+                resultsContainer.classList.remove('hidden');
+            }
+        }
+
+        function goToResult(sectionId, accordionId) {
+            showSection(sectionId);
+            document.getElementById('searchResults').classList.add('hidden');
+            document.getElementById('mainSearch').value = '';
+            setTimeout(() => {
+                const content = document.getElementById(accordionId);
+                if (!content.classList.contains('open')) toggleAccordion(accordionId);
+                content.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            document.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            const t = translations[currentLang];
+            document.getElementById('site-title').innerText = t.title;
+            document.getElementById('site-subtitle').innerText = t.subtitle;
+            document.getElementById('langBtnText').innerText = t.langBtn;
+            document.getElementById('hero-title').innerText = t.heroT;
+            document.getElementById('btn-cabinets').innerText = t.cab;
+            document.getElementById('btn-ams').innerText = t.ams;
+            document.getElementById('btn-protocols').innerText = t.prot;
+            document.getElementById('btn-lectures').innerText = t.lec;
+            document.getElementById('backIcon').className = currentLang === 'ar' ? 'fas fa-arrow-right text-xl' : 'fas fa-arrow-left text-xl';
         }
     </script>
 </body>
