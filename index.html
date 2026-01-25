@@ -13,12 +13,17 @@
         .card-hover { transition: all 0.3s; cursor: pointer; }
         .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .protocol-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-        .protocol-content.open { max-height: 3000px; transition: max-height 0.5s ease-in; }
-        .line-badge { background: #e5e7eb; color: #374151; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.75rem; display: inline-block; margin-bottom: 4px; }
+        .protocol-content.open { max-height: 4000px; transition: max-height 0.5s ease-in; }
+        .line-badge { padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.85rem; display: inline-block; margin-right: 5px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .badge-1st { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+        .badge-2nd { background: #f3f4f6; color: #374151; border: 1px solid #d1d5db; }
+        .badge-3rd { background: #ffedd5; color: #9a3412; border: 1px solid #fdba74; }
+        .medical-text { font-family: sans-serif; direction: ltr; text-align: left; }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
+    <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 h-24 flex items-center justify-between">
             <div class="flex items-center gap-4">
@@ -41,8 +46,10 @@
         </div>
     </header>
 
+    <!-- Main Content -->
     <main class="flex-grow max-w-7xl mx-auto px-4 w-full py-8 text-right" id="mainContainer">
         
+        <!-- Home Section -->
         <div id="homeSection" class="space-y-10 text-center">
             <section class="space-y-4 pt-8">
                 <div id="txt-badge" class="inline-block px-4 py-1.5 rounded-full bg-yellow-50 text-[#C5A021] font-bold text-xs border border-yellow-200">التميز في التعليم الصيدلي</div>
@@ -50,15 +57,17 @@
                 <p id="txt-hero-desc" class="max-w-2xl mx-auto text-gray-500 text-lg">المنصة الرقمية الموحدة للتدريب والتعليم المستمر لجميع الكوادر الطبية والصيادلة.</p>
             </section>
 
+            <!-- Search -->
             <div class="max-w-md mx-auto mb-10 relative text-right">
                 <div class="relative">
-                    <input type="text" id="mainSearch" onkeyup="liveSearch()" placeholder="ابحث عن بروتوكول أو دواء..." 
+                    <input type="text" id="mainSearch" onkeyup="liveSearch()" placeholder="ابحث عن بروتوكول أو دواء (مثال: Meropenem)..." 
                            class="w-full px-6 py-4 rounded-full border-2 border-gray-100 shadow-sm focus:border-[#C5A021] focus:outline-none text-right">
                     <i class="fas fa-search absolute left-6 top-1/2 -translate-y-1/2 text-gray-400"></i>
                 </div>
-                <div id="searchResults" class="absolute z-50 w-full bg-white mt-2 rounded-2xl shadow-xl hidden overflow-hidden border border-gray-100"></div>
+                <div id="searchResults" class="absolute z-50 w-full bg-white mt-2 rounded-2xl shadow-xl hidden overflow-hidden border border-gray-100 max-h-60 overflow-y-auto"></div>
             </div>
 
+            <!-- Dashboard Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div onclick="showSection('cabinetsSection')" class="bg-white p-6 rounded-[2rem] shadow-lg border-2 border-gray-50 flex flex-col items-center gap-4 card-hover">
                     <div class="w-16 h-16 rounded-2xl bg-[#C5A021] flex items-center justify-center text-2xl text-white shadow-lg"><i class="fas fa-briefcase-medical"></i></div>
@@ -79,6 +88,7 @@
             </div>
         </div>
 
+        <!-- AMS Section -->
         <div id="amsSection" class="hidden-section text-center">
             <h2 id="txt-ams-head" class="text-3xl font-bold mb-10">Anti Microbial Stewardship</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -93,6 +103,7 @@
             </div>
         </div>
 
+        <!-- AMS Journey -->
         <div id="amsJourneySection" class="hidden-section text-center">
             <h2 class="text-2xl font-bold mb-8 text-blue-800 txt-journey-name">مستشفى المضادات والرحلة العظيمة</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
@@ -105,18 +116,20 @@
             </div>
         </div>
 
+        <!-- Video Modal Section (Updated with Play attributes) -->
         <div id="videoSection" class="hidden-section">
             <div class="max-w-4xl mx-auto">
                 <div class="flex justify-between items-center mb-4 text-blue-700 font-bold">
-                    <span id="txt-vid-watch">مشاهدة الحلقة</span>
+                    <span id="txt-vid-watch">مشاهدة الفيديو</span>
                     <button onclick="goBack()" class="bg-red-100 text-red-600 px-4 py-1 rounded-full text-xs">إغلاق X</button>
                 </div>
                 <div class="relative pb-[56.25%] h-0 rounded-2xl overflow-hidden shadow-2xl bg-black border-4 border-white">
-                    <iframe id="videoIframe" class="absolute top-0 left-0 w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
+                    <iframe id="videoIframe" class="absolute top-0 left-0 w-full h-full" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
 
+        <!-- Protocols Home -->
         <div id="protocolsSection" class="hidden-section">
             <h2 id="txt-prot-head" class="text-3xl font-bold text-center mb-10 text-green-700">البروتوكولات الطبية 2026</h2>
             <div class="max-w-2xl mx-auto">
@@ -130,88 +143,192 @@
             </div>
         </div>
 
+        <!-- Pneumonia Section -->
         <div id="pneumoniaSection" class="hidden-section">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="text-2xl md:text-3xl font-bold text-green-700">Pneumonia Protocols</h2>
                 <a href="https://drive.google.com/file/d/1Epry7pCQZmPwfVjUv_h9tHqYzwuJTlID/view" target="_blank" class="bg-red-500 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 shadow"><i class="fas fa-file-pdf"></i> <span id="txt-download">تحميل PDF</span></a>
             </div>
             
-            <div class="space-y-4 max-w-4xl mx-auto">
+            <div class="space-y-6 max-w-4xl mx-auto">
+                
+                <!-- HAP Protocol -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style="border-right: 4px solid #2563eb;">
                     <div onclick="toggleAccordion('hap-prot')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
                         <span class="font-bold text-lg">Nosocomial Pneumonia (HAP)</span><i class="fas fa-chevron-down text-gray-400"></i>
                     </div>
-                    <div id="hap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
-                        <div class="bg-blue-50 p-4 rounded-lg">
-                            <h4 class="font-bold text-blue-800 underline mb-2">If NO risk factors for MDR:</h4>
-                            <p><span class="line-badge">1ST line</span> Ceftazidime 1-2g/8hr OR Cefepime 2g/8-12hr OR Pip/Tazo 4.5g/6hr</p>
-                            <p><span class="line-badge">2nd line</span> Meropenem 1g/8hr</p>
-                            <p class="text-red-600 font-bold mt-2">ADD anti-MRSA if risk factors present: Vancomycin, Linezolid, or Teicoplanin.</p>
+                    <div id="hap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4 medical-text">
+                        <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                            <h4 class="font-bold text-blue-900 mb-3 text-lg border-b border-blue-200 pb-1">If NO risk factors for MDR micro-organisms:</h4>
+                            <div class="mb-3">
+                                <span class="line-badge badge-1st">1st Line</span>
+                                <span class="font-bold text-gray-800">Ceftazidime:</span> 1-2 gm/8hr <span class="font-bold">OR</span>
+                                <span class="font-bold text-gray-800">Cefepime:</span> 2gm/8-12 hr <span class="font-bold">OR</span>
+                                <span class="font-bold text-gray-800">Piperacillin/Tazobactam:</span> 4.5gm/6hr
+                            </div>
+                            <div class="mb-3">
+                                <span class="line-badge badge-2nd">2nd Line</span>
+                                <span class="font-bold text-gray-800">Meropenem:</span> 1 gm/8hr
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-blue-200">
+                                <p class="font-bold text-red-700 mb-2 underline">ADD anti-MRSA if any risk factors are present:</p>
+                                <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                    <li><span class="line-badge badge-1st">1st Line</span> <span class="font-bold">Vancomycin:</span> 15 to 20 mg/kg/dose every 8 to 12 hours</li>
+                                    <li><span class="line-badge badge-2nd">2nd Line</span> <span class="font-bold">Linezolid:</span> 600mg/12hr</li>
+                                    <li><span class="line-badge badge-3rd">3rd Line</span> <span class="font-bold">Teicoplanin:</span> 6mg/Kg/12hr for 3 doses followed by 6 mg/kg once daily.</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="bg-red-50 p-4 rounded-lg">
-                            <h4 class="font-bold text-red-800 underline mb-2">If risk factors for MDR:</h4>
-                            <p><span class="line-badge">1ST line</span> Meropenem 1g/8h | <span class="line-badge">2nd line</span> Imipenem 500mg/6hrs</p>
-                            <p class="font-bold mt-2">+ PLUS: Levofloxacin/Ciprofloxacin 400mg/8hr OR Amikacin</p>
-                            <p class="font-bold mt-2 text-red-700">+ PLUS: Anti-MRSA (Vancomycin OR Linezolid)</p>
+                        <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                            <h4 class="font-bold text-red-900 mb-2 text-lg border-b border-red-200 pb-1">If risk factors for MDR micro-organisms present:</h4>
+                            <ul class="list-disc pl-5 mb-4 text-xs text-gray-600 italic">
+                                <li>Need for ventilatory support</li>
+                                <li>Septic shock</li>
+                                <li>Receipt of IV antibiotics within past 90 days</li>
+                            </ul>
+                            <div class="mb-3">
+                                <span class="line-badge badge-1st">1st Line</span> <span class="font-bold">Meropenem:</span> 1gm/8h
+                            </div>
+                            <div class="mb-3">
+                                <span class="line-badge badge-2nd">2nd Line</span> <span class="font-bold">Imipenem-cilastatin:</span> 500mg/6hrs
+                            </div>
+                            <div class="bg-white p-3 rounded border border-red-100 mb-2">
+                                <span class="font-bold text-purple-700 block mb-1">+ PLUS Antipseudomonal:</span>
+                                Fluoroquinolone (<span class="font-bold">Levofloxacin/Ciprofloxacin</span> 400mg/8hr) <span class="font-bold">OR</span> Aminoglycosides (<span class="font-bold">Amikacin</span>)
+                            </div>
+                            <div class="bg-white p-3 rounded border border-red-100">
+                                <span class="font-bold text-purple-700 block mb-1">+ PLUS Anti-MRSA:</span>
+                                <div><span class="line-badge badge-1st">1st Line</span> <span class="font-bold">Vancomycin:</span> 15-20 mg/kg/dose q8-12h</div>
+                                <div><span class="line-badge badge-2nd">2nd Line</span> <span class="font-bold">Linezolid:</span> 600mg/12hr</div>
+                            </div>
+                            <p class="mt-3 text-xs font-bold text-gray-500">Duration: 7 days (may extend to 10-14 days).</p>
                         </div>
                     </div>
                 </div>
 
+                <!-- VAP Protocol -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style="border-right: 4px solid #6D28D9;">
                     <div onclick="toggleAccordion('vap-prot')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
                         <span class="font-bold text-lg">Nosocomial Pneumonia (VAP)</span><i class="fas fa-chevron-down text-gray-400"></i>
                     </div>
-                    <div id="vap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
-                        <div class="bg-red-50 p-4 rounded-lg">
-                            <h4 class="font-bold text-red-800 underline mb-2">With risk factors for MDR:</h4>
-                            <p><span class="line-badge">1ST line</span> Meropenem 1g/8h | <span class="line-badge">2nd line</span> Imipenem 500mg/6hrs</p>
-                            <p class="font-bold mt-2">+ PLUS: Fluoroquinolone (Levo/Cipro) OR Amikacin</p>
-                            <p class="font-bold text-red-700 mt-2">+ PLUS: Anti-MRSA (Vancomycin OR Linezolid)</p>
+                    <div id="vap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4 medical-text">
+                        <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                            <h4 class="font-bold text-purple-900 mb-3 text-lg">If NO risk factors for MDR:</h4>
+                            <p class="mb-2"><span class="line-badge badge-1st">1st Line</span> <span class="font-bold">Ceftazidime</span> 1-2 gm/8hr OR <span class="font-bold">Cefepime</span> 2gm/8-12hr OR <span class="font-bold">Pip/Tazo</span> 4.5gm/6hr</p>
+                            <p class="mb-2"><span class="line-badge badge-2nd">2nd Line</span> <span class="font-bold">Meropenem</span> 1gm/8hr</p>
+                            <div class="mt-3 pt-3 border-t border-purple-200">
+                                <p class="font-bold text-gray-700 mb-1">ADD Anti-MRSA if risk factors present:</p>
+                                <p><span class="line-badge badge-1st">1st</span> <span class="font-bold">Vancomycin</span> 15-20 mg/kg/dose q8-12h</p>
+                                <p><span class="line-badge badge-2nd">2nd</span> <span class="font-bold">Linezolid</span> 600mg/12hr</p>
+                                <p><span class="line-badge badge-3rd">3rd</span> <span class="font-bold">Teicoplanin</span> 6mg/kg/12hr (3 doses) then 6mg/kg daily.</p>
+                            </div>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                            <h4 class="font-bold text-red-900 mb-2 text-lg">If risk factors for MDR present:</h4>
+                            <ul class="list-disc pl-5 mb-4 text-xs text-gray-600 italic">
+                                <li>ARDS preceding VAP</li>
+                                <li>Septic shock</li>
+                                <li>IV antibiotics within past 90 days</li>
+                                <li>≥5 days hospitalization prior to VAP</li>
+                                <li>Acute renal replacement therapy prior to VAP</li>
+                            </ul>
+                            <p class="mb-1"><span class="line-badge badge-1st">1st Line</span> <span class="font-bold">Meropenem</span> 1gm/8h</p>
+                            <p class="mb-3"><span class="line-badge badge-2nd">2nd Line</span> <span class="font-bold">Imipenem-cilastatin</span> 500mg/6hrs</p>
+                            <div class="bg-white p-3 rounded border border-red-100 mb-2">
+                                <span class="font-bold text-purple-700 block">+ PLUS Antipseudomonal:</span>
+                                Fluoroquinolone (<span class="font-bold">Levofloxacin, Ciprofloxacin</span>) OR Aminoglycosides (<span class="font-bold">Amikacin</span>)
+                            </div>
+                            <div class="bg-white p-3 rounded border border-red-100">
+                                <span class="font-bold text-purple-700 block">+ PLUS Anti-MRSA:</span>
+                                <span class="font-bold">Vancomycin</span> (15-20 mg/kg q8-12h) OR <span class="font-bold">Linezolid</span> (600mg/12hr)
+                            </div>
+                            <p class="mt-3 text-xs font-bold text-gray-500">Duration: 7 days (extend to 10-14 in severe cases).</p>
                         </div>
                     </div>
                 </div>
 
+                <!-- CAP Protocol -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style="border-right: 4px solid #059669;">
                     <div onclick="toggleAccordion('cap-prot')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
-                        <span class="font-bold text-lg">Community Acquired (CAP)</span><i class="fas fa-chevron-down text-gray-400"></i>
+                        <span class="font-bold text-lg">Community Acquired (CAP) - Ward/ICU</span><i class="fas fa-chevron-down text-gray-400"></i>
                     </div>
-                    <div id="cap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4 text-right">
-                        <div class="bg-emerald-50 p-4 rounded-lg">
-                            <h4 class="font-bold mb-2">Non-severe:</h4>
-                            <p>Ampicillin-sulbactam 3g/6hr + Clarithromycin 500mg/12hr</p>
+                    <div id="cap-prot" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4 medical-text">
+                        <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                            <h4 class="font-bold text-green-800 mb-3 text-lg">Non-severe (No MRSA/Pseudomonas risk):</h4>
+                            <div class="mb-3">
+                                <span class="line-badge badge-1st">1st Line</span>
+                                <ul class="list-none pl-1 mt-1 space-y-1">
+                                    <li>• <span class="font-bold">Ampicillin-sulbactam</span> 3gm/6hr + <span class="font-bold">Clarithromycin</span> 500mg/12hr</li>
+                                    <li>• <span class="font-bold">OR Cefotaxime</span> 1-2gm/8hr (or Ceftriaxone 1gm/24hr) + <span class="font-bold">Clarithromycin</span> 500mg/12hr</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <span class="line-badge badge-2nd">2nd Line (Monotherapy)</span>
+                                <p class="mt-1"><span class="font-bold">Moxifloxacin</span> 400mg once OR <span class="font-bold">Levofloxacin</span> 750mg once daily.</p>
+                            </div>
                         </div>
-                        <div class="bg-red-50 p-4 rounded-lg">
-                            <h4 class="font-bold mb-2">Risk of Pseudomonas & MRSA:</h4>
-                            <p><span class="line-badge">1st</span> Ceftazidime OR Cefepime | <span class="line-badge">2nd</span> Pip/Tazo OR Meropenem</p>
-                            <p class="font-bold mt-2">+ PLUS: Levo OR Amikacin (+ Azithro) PLUS Vancomycin/Linezolid</p>
+                        <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
+                            <h4 class="font-bold text-yellow-800 mb-3 text-lg">Severe (No MRSA/Pseudomonas risk):</h4>
+                            <div class="mb-3">
+                                <span class="line-badge badge-1st">1st Line</span>
+                                <div class="pl-2 border-l-2 border-yellow-200 ml-1 mt-1">
+                                    <p><span class="font-bold">Ampicillin-sulbactam</span> 3gm/6hr OR <span class="font-bold">Cefotaxime/Ceftriaxone</span></p>
+                                    <p class="font-black text-center text-yellow-600 my-1">--- PLUS ---</p>
+                                    <p><span class="font-bold">Clarithromycin</span> 500mg/12hr OR <span class="font-bold">Moxifloxacin</span> 400mg OR <span class="font-bold">Levofloxacin</span> 750mg</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                            <h4 class="font-bold text-red-800 mb-3 text-lg">Risk of Pseudomonas & MRSA:</h4>
+                            <p class="mb-1"><span class="line-badge badge-1st">1st Line</span> <span class="font-bold">Ceftazidime</span> 1-2 gm/8hr OR <span class="font-bold">Cefepime</span> 1-2gm/8-12hr</p>
+                            <p class="mb-3"><span class="line-badge badge-2nd">2nd Line</span> <span class="font-bold">Piperacillin/Tazobactam</span> 4.5gm/6hr OR <span class="font-bold">Meropenem</span> 1gm/8hr</p>
+                            <div class="bg-white p-3 rounded border border-red-100 mb-2">
+                                <span class="font-bold text-purple-700 block mb-1">+ PLUS (Choose One):</span>
+                                <ul class="list-disc pl-5">
+                                    <li><span class="font-bold">Levofloxacin</span> 750mg once</li>
+                                    <li><span class="font-bold">Amikacin</span> 15mg/kg divided / 8-12hr (If Amikacin used, add <span class="font-bold">Azithromycin</span> 500mg/24hr)</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-3 rounded border border-red-100">
+                                <span class="font-bold text-purple-700 block mb-1">+ PLUS Anti-MRSA (Choose One):</span>
+                                <ul class="list-disc pl-5">
+                                    <li><span class="font-bold">Vancomycin</span> 15-20 mg/kg q8-12h</li>
+                                    <li><span class="font-bold">Linezolid</span> 600mg/12hr</li>
+                                    <li><span class="font-bold">Teicoplanin</span> 6mg/kg/12hr (3 doses) then 6mg/kg daily</li>
+                                </ul>
+                            </div>
+                            <p class="mt-3 text-xs font-bold text-gray-500">Duration: 5-7 days</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Lectures Month View -->
         <div id="lecturesSection" class="hidden-section text-center">
             <h2 id="txt-lec-head" class="text-3xl font-bold mb-10 text-blue-700">المحاضرات الشهرية</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto" id="lecturesGrid"></div>
         </div>
 
+        <!-- January Specific Section -->
         <div id="januarySection" class="hidden-section">
-            <div class="max-w-2xl mx-auto bg-white p-6 rounded-3xl shadow-xl border-4 border-blue-50 relative">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 id="txt-jan-title" class="text-xl font-bold text-blue-700">محاضرة شهر يناير</h3>
-                    <button onclick="goBack()" class="text-red-500 font-bold">X</button>
+            <div class="max-w-2xl mx-auto bg-white p-2 rounded-3xl shadow-xl border-4 border-blue-50 relative">
+                <div class="flex justify-between items-center mb-2 px-4 pt-2">
+                    <h3 id="txt-jan-title" class="text-xl font-bold text-blue-700">محاضرات شهر يناير</h3>
+                    <button onclick="goBack()" class="text-red-500 font-bold bg-red-50 px-3 py-1 rounded-full">X</button>
                 </div>
-                <img src="https://i.postimg.cc/0j0Nq5r1/january-lecture.jpg" class="w-full h-auto rounded-2xl border">
+                <img src="https://i.postimg.cc/25LR8QDc/IMG-20260125-100532.jpg" class="w-full h-auto rounded-2xl">
             </div>
         </div>
 
+        <!-- Cabinets Section -->
         <div id="cabinetsSection" class="hidden-section text-center">
             <h2 id="txt-cab-head" class="text-3xl font-bold mb-10 text-[#C5A021]">دواليب الطوارئ</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <div class="p-8 bg-orange-50 rounded-3xl border-2 border-orange-200 shadow-sm card-hover">
                     <i class="fas fa-fire text-5xl text-orange-500 mb-4"></i>
                     <h3 id="txt-burn-title" class="text-2xl font-bold mb-4">دولاب الحروق</h3>
-                    <a href="https://drive.google.com/file/d/1E2YYiG68zHqS_3jHUoPMc0QsYvV-8mph/view" target="_blank" id="txt-watch-v" class="px-8 py-3 bg-orange-500 text-white rounded-full font-bold inline-block">مشاهدة الفيديو</a>
+                    <button onclick="playVideo('https://drive.google.com/file/d/1E2YYiG68zHqS_3jHUoPMc0QsYvV-8mph/preview')" id="txt-watch-v" class="px-8 py-3 bg-orange-500 text-white rounded-full font-bold inline-block hover:bg-orange-600 transition">مشاهدة الفيديو</button>
                 </div>
                 <div class="p-8 bg-red-50 rounded-3xl border-2 border-red-200 shadow-sm">
                     <i class="fas fa-heartbeat text-5xl text-red-500 mb-4"></i>
@@ -233,22 +350,21 @@
                 siteTitle: "أكاديمية قسم الصيدلية - مستشفى المطرية التعليمي", siteSubtitle: "بوابة التعليم الطبي المستمر", langBtn: "English",
                 badge: "التميز في التعليم الصيدلي", heroT: "المنصة التعليمية لقسم الصيدلية", heroD: "المنصة الرقمية الموحدة للتدريب والتعليم المستمر لجميع الكوادر الطبية والصيادلة.",
                 cabinets: "دواليب الطوارئ", ams: "سياسة صرف المضادات", protocols: "البروتوكولات", lectures: "المحاضرات الشهرية", search: "ابحث عن بروتوكول أو دواء...",
-                amsHead: "Anti Microbial Stewardship", journey: "مستشفى المضادات والرحلة العظيمة", calc: "حاسبة الجرعات", watchEpisode: "مشاهدة الحلقة",
-                burn: "دولاب الحروق", erTitle: "دولاب الكوارث", erDesc: "قريباً: شرح تفصيلي لمحتويات دولاب الطوارئ", watchVideo: "مشاهدة الفيديو", download: "تحميل PDF", janTitle: "محاضرة شهر يناير", footer: "جميع الحقوق محفوظة © 2026"
+                amsHead: "Anti Microbial Stewardship", journey: "مستشفى المضادات والرحلة العظيمة", calc: "حاسبة الجرعات", watchEpisode: "مشاهدة الفيديو",
+                burn: "دولاب الحروق", erTitle: "دولاب الكوارث", erDesc: "قريباً: شرح تفصيلي لمحتويات دولاب الطوارئ", watchVideo: "مشاهدة الفيديو", download: "تحميل PDF", janTitle: "محاضرات شهر يناير", footer: "جميع الحقوق محفوظة © 2026"
             },
             en: {
                 siteTitle: "Pharmacy Dept Academy", siteSubtitle: "Medical Education Portal", langBtn: "العربية",
                 badge: "Pharmacy Excellence", heroT: "Learning Platform", heroD: "Unified digital platform for medical training.",
                 cabinets: "ER Cabinets", ams: "AMS Policy", protocols: "Protocols", lectures: "Lectures", search: "Search protocols...",
-                amsHead: "AMS Program", journey: "Antimicrobial Journey", calc: "Dose Calc", watchEpisode: "Watch Episode",
-                burn: "Burns Cabinet", erTitle: "ER Cabinet", erDesc: "Coming Soon: Detailed contents", watchVideo: "Watch Video", download: "Download PDF", janTitle: "January Lecture", footer: "All Rights Reserved © 2026"
+                amsHead: "AMS Program", journey: "Antimicrobial Journey", calc: "Dose Calc", watchEpisode: "Watch Video",
+                burn: "Burns Cabinet", erTitle: "ER Cabinet", erDesc: "Coming Soon: Detailed contents", watchVideo: "Watch Video", download: "Download PDF", janTitle: "January Lectures", footer: "All Rights Reserved © 2026"
             }
         };
 
         let currentLang = 'ar';
         let navigationHistory = ['homeSection'];
 
-        // منع الخروج بزر الرجوع
         history.pushState(null, null, location.href);
         window.onpopstate = function() {
             if (navigationHistory.length > 1) {
@@ -313,7 +429,6 @@
             document.getElementById('txt-watch-v').innerText = t.watchVideo;
             document.getElementById('txt-footer').innerText = t.footer;
 
-            // ضبط المحاذاة والأسهم
             const align = isAr ? 'text-right' : 'text-left';
             document.getElementById('mainContainer').className = `flex-grow max-w-7xl mx-auto px-4 w-full py-8 ${align}`;
             document.getElementById('headerTexts').className = `hidden sm:flex flex-col ${align}`;
@@ -345,27 +460,62 @@
             if (!isOpen) el.classList.add('open');
         }
 
+        // Updated Search with Drug Database
         function liveSearch() {
             const q = document.getElementById('mainSearch').value.toLowerCase();
             const res = document.getElementById('searchResults');
             if (q.length < 2) { res.classList.add('hidden'); return; }
+            
+            // Expanded data with Keywords (Drugs)
             const data = [
-                {t: "Pneumonia - HAP", id: "hap-prot", p: "pneumoniaSection"},
-                {t: "Pneumonia - VAP", id: "vap-prot", p: "pneumoniaSection"},
-                {t: "Pneumonia - CAP", id: "cap-prot", p: "pneumoniaSection"}
+                {
+                    t: "Pneumonia - HAP (Nosocomial)", 
+                    id: "hap-prot", 
+                    p: "pneumoniaSection",
+                    k: "ceftazidime cefepime piperacillin tazobactam meropenem vancomycin linezolid teicoplanin imipenem cilastatin levofloxacin ciprofloxacin amikacin nosocomial"
+                },
+                {
+                    t: "Pneumonia - VAP (Ventilator Associated)", 
+                    id: "vap-prot", 
+                    p: "pneumoniaSection",
+                    k: "ceftazidime cefepime piperacillin tazobactam meropenem vancomycin linezolid teicoplanin imipenem cilastatin levofloxacin ciprofloxacin amikacin ventilator"
+                },
+                {
+                    t: "Pneumonia - CAP (Community Acquired)", 
+                    id: "cap-prot", 
+                    p: "pneumoniaSection",
+                    k: "ampicillin sulbactam clarithromycin cefotaxime ceftriaxone moxifloxacin levofloxacin ceftazidime cefepime piperacillin tazobactam meropenem amikacin azithromycin vancomycin linezolid teicoplanin community"
+                }
             ];
-            const matches = data.filter(i => i.t.toLowerCase().includes(q));
+
+            const matches = data.filter(i => 
+                i.t.toLowerCase().includes(q) || 
+                i.k.toLowerCase().includes(q)
+            );
+
             if (matches.length > 0) {
-                res.innerHTML = matches.map(m => `<div onclick="goToResult('${m.p}', '${m.id}')" class="p-4 hover:bg-gray-50 border-b cursor-pointer">${m.t}</div>`).join('');
+                res.innerHTML = matches.map(m => `
+                    <div onclick="goToResult('${m.p}', '${m.id}')" class="p-4 hover:bg-gray-50 border-b cursor-pointer flex justify-between items-center group">
+                        <span class="font-bold text-gray-700 group-hover:text-blue-600">${m.t}</span>
+                        <i class="fas fa-chevron-left text-gray-300"></i>
+                    </div>
+                `).join('');
                 res.classList.remove('hidden');
-            } else { res.innerHTML = '<div class="p-4 text-gray-400">لا توجد نتائج</div>'; res.classList.remove('hidden'); }
+            } else { 
+                res.innerHTML = '<div class="p-4 text-gray-400 text-center">لا توجد نتائج</div>'; 
+                res.classList.remove('hidden'); 
+            }
         }
 
         function goToResult(p, id) {
             showSection(p);
             document.getElementById('searchResults').classList.add('hidden');
             document.getElementById('mainSearch').value = '';
-            setTimeout(() => toggleAccordion(id), 300);
+            // Smooth scroll and open
+            setTimeout(() => {
+                toggleAccordion(id);
+                document.getElementById(id).scrollIntoView({behavior: "smooth", block: "center"});
+            }, 300);
         }
 
         renderLectures();
