@@ -131,21 +131,52 @@ cursor-pointer hover:scale-110 shadow-lg">4</div>
             </div>
         </div>
 
-        <!-- Protocols Home -->
         <div id="protocolsSection" class="hidden-section">
-            <h2 id="txt-prot-head" class="text-3xl font-bold text-center mb-10 text-green-700">البروتوكولات الطبية 2026</h2>
-            <div class="max-w-2xl mx-auto">
-                <div onclick="showSection('pneumoniaSection')" class="bg-white p-8 rounded-3xl shadow-md border-2 border-green-50 flex items-center justify-between card-hover">
-                    <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-2xl"><i class="fas fa-lungs"></i></div>
-                        <span class="text-2xl font-bold text-gray-800">Pneumonia</span>
-                    </div>
-                    <i class="fas fa-chevron-left text-gray-400" id="nav-arrow-1"></i>
-                </div>
-            </div>
-        </div>
 
-        <!-- Pneumonia Section -->
+  <h2 id="txt-prot-head" class="text-3xl font-bold text-center mb-10 text-green-700">
+    2026 البروتوكولات الطبية
+  </h2>
+
+  <div class="max-w-2xl mx-auto space-y-4">
+
+    <!-- Pneumonia -->
+    <div onclick="showSection('pneumoniaSection')" 
+    class="bg-white p-8 rounded-3xl shadow-md border-2 border-green-50 flex items-center justify-between card-hover">
+
+      <div class="flex items-center gap-4">
+        <i class="fas fa-chevron-left text-gray-400"></i>
+        <span class="text-2xl font-bold text-gray-800">Pneumonia</span>
+      </div>
+
+      <div class="w-14 h-14 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-2xl">
+        <i class="fas fa-lungs"></i>
+      </div>
+
+    </div>
+
+    <!-- Burns -->
+    <div onclick="showSection('burnsSection')" 
+    class="bg-white p-8 rounded-3xl shadow-md border-2 border-orange-50 flex items-center justify-between card-hover">
+
+      <div class="flex items-center gap-4">
+        <i class="fas fa-chevron-left text-gray-400"></i>
+        <span class="text-2xl font-bold text-gray-800 txt-burns-title">
+          Burns & Plastic Surgery
+        </span>
+      </div>
+
+      <div class="w-14 h-14 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-2xl">
+        <i class="fas fa-fire-flame-curved"></i>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+       
+</div>
+<!-- Pneumonia Section -->
         <div id="pneumoniaSection" class="hidden-section">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="text-2xl md:text-3xl font-bold text-green-700">Pneumonia Protocols</h2>
@@ -305,7 +336,185 @@ cursor-pointer hover:scale-110 shadow-lg">4</div>
                 </div>
             </div>
         </div>
+<!-- Burns & Plastic Surgery Section -->
+<div id="burnsSection" class="hidden-section">
+    <div class="flex justify-between items-center mb-8">
+        <h2 class="text-2xl md:text-3xl font-bold text-orange-600">Burns & Plastic Surgery Protocols</h2>
+        <a href="https://drive.google.com/file/d/15_jfrbcCkS7ulTbwAHVDKJyrLs2ZzJ55/view?usp=sharing" target="_blank"
+            class="bg-red-500 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 shadow">
+            <i class="fas fa-file-pdf"></i> <span class="txt-burns-download">تحميل PDF</span>
+        </a>
+    </div>
+    <div class="space-y-6 max-w-4xl mx-auto medical-text">
 
+        <!-- 1. Fixation of Phalanges -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style="border-right: 4px solid #ea580c;">
+            <div onclick="toggleAccordion('burns-phal')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
+                <span class="font-bold text-lg">1- Fixation of Phalanges of the Hand Surgery</span>
+                <i class="fas fa-chevron-down text-gray-400"></i>
+            </div>
+            <div id="burns-phal" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
+                <div class="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-400">
+                    <div class="mb-3"><span class="font-bold text-gray-800">Clean operation (no prosthesis):</span> No antibiotic prophylaxis needed.</div>
+                    <div class="mb-3"><span class="font-bold text-gray-800">Clean with prosthesis / Type I & II fractures:</span> <span class="line-badge badge-1st">1st</span> Cefazolin &nbsp;|&nbsp; <span class="text-gray-600 italic">Penicillin allergy: Clindamycin</span></div>
+                    <div class="mb-3"><span class="font-bold text-gray-800">Type III fracture (extensive damage):</span> Ceftriaxone ± Metronidazole (if soil/fecal contamination)<br>
+                        <span class="text-gray-600 italic">Penicillin allergy: Clindamycin + Levofloxacin (no contamination) OR Levofloxacin + Metronidazole (contaminated)</span>
+                    </div>
+                    <div class="bg-gray-100 p-3 rounded mt-2">
+                        <span class="font-bold text-red-700">MRSA Risk: Add Vancomycin</span>
+                        <p class="text-xs text-gray-600 mt-1">Risk groups: recent hospital discharge, prior MRSA, chronic hemodialysis, IV drug users.</p>
+                    </div>
+                    <p class="text-xs font-bold text-gray-500 mt-2">Timing: Pre-surgery and 24hr after. If contaminated: 48 hours.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Mandibular & Facial Fracture -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style="border-right: 4px solid #d97706;">
+            <div onclick="toggleAccordion('burns-mandib')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
+                <span class="font-bold text-lg">2- Fixation of Mandibular and Facial Fracture Surgery</span>
+                <i class="fas fa-chevron-down text-gray-400"></i>
+            </div>
+            <div id="burns-mandib" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
+                <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400">
+                    <div class="mb-3"><span class="font-bold">Closed fracture:</span> <span class="line-badge badge-1st">1st</span> Cefazolin + Metronidazole &nbsp; <span class="line-badge badge-2nd">2nd</span> Ampicillin-Sulbactam<br><span class="text-gray-600 italic">Penicillin allergy: Clindamycin — Timing: Pre-surgery + 24hr</span></div>
+                    <div class="mb-3"><span class="font-bold">Type III / Craniomaxillofacial trauma:</span> <span class="line-badge badge-1st">1st</span> Ampicillin-Sulbactam &nbsp; <span class="line-badge badge-2nd">2nd</span> Ceftriaxone 1g/24hr + Metronidazole<br><span class="text-gray-600 italic">Penicillin allergy: Clindamycin + Levofloxacin — Timing: Pre-surgery + 48hr</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Vascular & Tendon Repair -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style="border-right: 4px solid #b45309;">
+            <div onclick="toggleAccordion('burns-vasc')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
+                <span class="font-bold text-lg">3- Vascular and Tendon Repair</span>
+                <i class="fas fa-chevron-down text-gray-400"></i>
+            </div>
+            <div id="burns-vasc" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
+                <div class="bg-amber-50 p-4 rounded-lg border-l-4 border-amber-400">
+                    <div class="mb-2"><span class="font-bold">Clean surgery:</span> Cefazolin &nbsp;|&nbsp; <span class="text-gray-600 italic">Penicillin allergy: Clindamycin</span></div>
+                    <div class="mb-2"><span class="font-bold">Clean contaminated:</span> Cefazolin &nbsp;|&nbsp; <span class="text-gray-600 italic">Penicillin allergy: Clindamycin + Gentamicin</span></div>
+                    <p class="text-xs font-bold text-gray-500 mt-2">Timing: Pre-surgery + 24hr after surgery.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Abrasion Wounds -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style="border-right: 4px solid #c2410c;">
+            <div onclick="toggleAccordion('burns-abras')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
+                <span class="font-bold text-lg">4- Abrasion Wounds</span>
+                <i class="fas fa-chevron-down text-gray-400"></i>
+            </div>
+            <div id="burns-abras" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
+                <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-400">
+                    <div class="mb-2"><span class="font-bold">Mild to Moderate:</span> Amoxicillin-Clavulanate 500/125mg PO q8h &nbsp;|&nbsp; Add Clindamycin 300-450mg PO q6h (MRSA risk)</div>
+                    <div class="mb-2"><span class="font-bold">Severe:</span> Ceftriaxone 1-2g IV q24h &nbsp;|&nbsp; Add Vancomycin 1g IV q12h (MRSA risk)</div>
+                    <div class="mb-2"><span class="font-bold">Water-exposed wounds:</span> Add Pseudomonas coverage — Ciprofloxacin, Ceftazidime, or Piperacillin-Tazobactam</div>
+                    <p class="text-xs font-bold text-gray-500 mt-2">Duration: 5-7 days. Reassess based on culture results.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Surgery of Debridement for Ulcerated Wound -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style="border-right: 4px solid #dc2626;">
+            <div onclick="toggleAccordion('burns-debrid')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
+                <span class="font-bold text-lg">5- Surgery of Debridement for Ulcerated Wound</span>
+                <i class="fas fa-chevron-down text-gray-400"></i>
+            </div>
+            <div id="burns-debrid" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
+                <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                    <p class="font-bold text-gray-700 mb-2">Pre-surgery prophylaxis: <span class="line-badge badge-1st">1st</span> Cefazolin <span class="line-badge badge-2nd">2nd</span> Cefoxitin <span class="line-badge badge-3rd">3rd</span> Ampicillin-Sulbactam</p>
+                    <div class="mb-2"><span class="font-bold">Mild to Moderate:</span> Amoxicillin-Clavulanate 500/125mg q8h OR Levofloxacin 750mg q24h OR Moxifloxacin 400mg/24hr &nbsp;|&nbsp; Add Clindamycin 300-450mg q6-8h (MRSA/anaerobic)</div>
+                    <div class="mb-2"><span class="font-bold">Severe:</span> Ceftriaxone 1-2g q24h OR Piperacillin-Tazobactam 3.375-4.5g q6-8h OR Imipenem 500-1000mg q6-8h &nbsp;|&nbsp; Add Vancomycin 1-2g q12h (MRSA) &nbsp;|&nbsp; Add Metronidazole 500mg/8hr (anaerobic)</div>
+                    <p class="text-xs font-bold text-gray-500 mt-2">Duration: 5-14 days. Adjust based on clinical response and wound culture.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Necrotizing Fasciitis / Gas Gangrene -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style="border-right: 4px solid #7c3aed;">
+            <div onclick="toggleAccordion('burns-necro')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
+                <span class="font-bold text-lg">6- Necrotizing Fasciitis or Gas Gangrene</span>
+                <i class="fas fa-chevron-down text-gray-400"></i>
+            </div>
+            <div id="burns-necro" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
+                <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                    <div class="mb-2"><span class="line-badge badge-1st">1st</span> <span class="font-bold">Vancomycin</span> 15-20mg/kg/8-12hr <span class="font-bold text-purple-700"> + </span> Piperacillin-Tazobactam 4.5g/6hr <span class="font-bold">OR</span> Meropenem 1-2g/8hr <span class="font-bold text-purple-700"> + </span> Clindamycin 600-900mg/6hr (anti-toxin)</div>
+                    <div class="mb-2"><span class="line-badge badge-2nd">2nd</span> <span class="font-bold">Linezolid</span> 600mg/12hr (also has anti-toxin effect)</div>
+                    <div class="bg-white p-3 rounded border border-purple-100 mt-2">
+                        <span class="font-bold text-red-700">Penicillin allergy:</span> Clindamycin 600-900mg/6hr OR Metronidazole 500mg/6hr <strong>+</strong> Levofloxacin 750mg/24hr OR Ciprofloxacin 400mg/12hr
+                    </div>
+                    <p class="text-xs font-bold text-gray-500 mt-2">Duration: 2-3 weeks. Continue until debridement no longer needed and fever resolved 2-3 days. ⚠️ Avoid Vancomycin + Pip-Tazo combination (nephrotoxic).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Pre-Surgery Dosing -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style="border-right: 4px solid #0891b2;">
+            <div onclick="toggleAccordion('burns-dosing')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
+                <span class="font-bold text-lg">7- Pre-Surgery Antibiotics Dosing & Re-dosing</span>
+                <i class="fas fa-chevron-down text-gray-400"></i>
+            </div>
+            <div id="burns-dosing" class="protocol-content px-5 pb-5 text-sm space-y-3 border-t border-gray-50 pt-4">
+                <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400 overflow-x-auto">
+                    <table class="w-full text-xs border-collapse">
+                        <thead><tr class="bg-blue-100"><th class="p-2 border border-blue-200">Drug</th><th class="p-2 border border-blue-200">Adult Dose</th><th class="p-2 border border-blue-200">Re-dose Interval</th><th class="p-2 border border-blue-200">Post-op</th><th class="p-2 border border-blue-200">Pre-op Timing</th></tr></thead>
+                        <tbody>
+                            <tr><td class="p-2 border border-blue-100 font-bold">Cefazolin</td><td class="p-2 border border-blue-100">2g (&lt;120kg) / 3g (≥120kg)</td><td class="p-2 border border-blue-100">4hr</td><td class="p-2 border border-blue-100">2g/8hr × 2 doses</td><td class="p-2 border border-blue-100">60 min before</td></tr>
+                            <tr class="bg-white"><td class="p-2 border border-blue-100 font-bold">Cefoxitin</td><td class="p-2 border border-blue-100">2g</td><td class="p-2 border border-blue-100">2hr</td><td class="p-2 border border-blue-100">2g/6hr × 3 doses</td><td class="p-2 border border-blue-100">60 min before</td></tr>
+                            <tr><td class="p-2 border border-blue-100 font-bold">Ampicillin-Sulbactam</td><td class="p-2 border border-blue-100">3g (Amp 2g/Sulb 1g)</td><td class="p-2 border border-blue-100">2hr</td><td class="p-2 border border-blue-100">3g/6hr × 3 doses</td><td class="p-2 border border-blue-100">60 min before</td></tr>
+                            <tr class="bg-white"><td class="p-2 border border-blue-100 font-bold">Clindamycin (PCN allergy)</td><td class="p-2 border border-blue-100">900mg</td><td class="p-2 border border-blue-100">6hr</td><td class="p-2 border border-blue-100">900mg/8hr × 2 doses</td><td class="p-2 border border-blue-100">60 min before</td></tr>
+                            <tr><td class="p-2 border border-blue-100 font-bold">Vancomycin (PCN allergy)</td><td class="p-2 border border-blue-100">15mg/kg</td><td class="p-2 border border-blue-100">NA</td><td class="p-2 border border-blue-100">15mg/kg (max 2g)</td><td class="p-2 border border-blue-100">120 min before</td></tr>
+                            <tr class="bg-white"><td class="p-2 border border-blue-100 font-bold">Metronidazole</td><td class="p-2 border border-blue-100">500mg</td><td class="p-2 border border-blue-100">6-8hr</td><td class="p-2 border border-blue-100">500mg q8hr × 2 doses</td><td class="p-2 border border-blue-100">60 min before</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Infected Open Wound / SSI -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style="border-right: 4px solid #059669;">
+            <div onclick="toggleAccordion('burns-ssi')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
+                <span class="font-bold text-lg">8- Infected Open Wound (Surgical Site Infection)</span>
+                <i class="fas fa-chevron-down text-gray-400"></i>
+            </div>
+            <div id="burns-ssi" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
+                <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                    <div class="mb-2"><span class="font-bold">Clean (trunk/head/neck/extremities):</span> <span class="line-badge badge-1st">1st</span> Cefazolin 1g/8hr</div>
+                    <div class="mb-3"><span class="font-bold">Contaminated/Dirty (axilla/GI/perineum/genital):</span><br>
+                        <span class="line-badge badge-1st">1st</span> Ceftriaxone 1g/24hr + Metronidazole 500mg/8hr <strong>OR</strong> Pip-Tazo 4.5g/8hr <strong>OR</strong> Imipenem 500mg/6hr <strong>OR</strong> Meropenem 1g/8hr<br>
+                        <span class="line-badge badge-2nd">2nd</span> Levofloxacin 750mg/24hr + Metronidazole <strong>OR</strong> Ciprofloxacin 400mg/12hr + Metronidazole
+                    </div>
+                    <div class="bg-white p-2 rounded border border-green-100"><span class="font-bold text-red-700">MRSA Risk:</span> Vancomycin 30mg/kg/day in 2 divided doses OR Linezolid 600mg/12hr</div>
+                    <p class="text-xs font-bold text-gray-500 mt-2">Duration: 7-10 days, extend based on severity.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. Burn Infections -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style="border-right: 4px solid #f97316;">
+            <div onclick="toggleAccordion('burns-burn')" class="p-5 flex justify-between items-center cursor-pointer hover:bg-gray-50">
+                <span class="font-bold text-lg">9- Burn Infections</span>
+                <i class="fas fa-chevron-down text-gray-400"></i>
+            </div>
+            <div id="burns-burn" class="protocol-content px-5 pb-5 text-sm space-y-4 border-t border-gray-50 pt-4">
+                <div class="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-500">
+                    <div class="mb-3"><span class="font-bold">Acute burn infection (topical):</span> Silver sulfadiazine, silver nitrate, silver-impregnated dressings, Bivatracin spray. MRSA topical: Mupirocin, Fusidic acid, Gentamicin sulfate, topical Vancomycin.</div>
+                    <div class="mb-3"><span class="font-bold">Non-invasive burn wound infection:</span> <span class="line-badge badge-1st">1st</span> Cefazolin 1-2g/8hr OR Clindamycin 600mg/8hr ± oral Levofloxacin (lower extremity/diabetic burns)</div>
+                    <div class="mb-3"><span class="font-bold">Invasive burn wound infection & Sepsis:</span><br>
+                        <span class="line-badge badge-1st">1st</span> Pip-Tazo 4.5g/8hr ± Amikacin 15-20mg/kg/day (MDR Pseudomonas)<br>
+                        <span class="line-badge badge-2nd">2nd</span> Imipenem 500mg/6hr OR Meropenem 1g/8hr ± Amikacin
+                    </div>
+                    <div class="mb-2"><span class="font-bold">Skin grafting infection:</span><br>
+                        <span class="line-badge badge-1st">1st</span> Cefazolin 1-2g/8hr OR Ceftriaxone 1g/24hr + Metronidazole OR Pip-Tazo 3.375-4.5g/6-8hr<br>
+                        <span class="line-badge badge-2nd">2nd</span> Levofloxacin OR Ciprofloxacin + Metronidazole
+                    </div>
+                    <div class="bg-white p-2 rounded border border-orange-100"><span class="font-bold text-red-700">MRSA suspected:</span> Vancomycin 30mg/kg/day IV in 2 doses OR Linezolid 600mg/12hr. ⚠️ Avoid Vancomycin + Pip-Tazo.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
         <!-- Lectures Month View -->
         <div id="lecturesSection" class="hidden-section text-center">
             <h2 id="txt-lec-head" class="text-3xl font-bold mb-10 text-blue-700">المحاضرات الشهرية</h2>
@@ -322,7 +531,54 @@ cursor-pointer hover:scale-110 shadow-lg">4</div>
                 <img src="https://i.postimg.cc/25LR8QDc/IMG-20260125-100532.jpg" class="w-full h-auto rounded-2xl">
             </div>
         </div>
+<!-- February Section -->
+<div id="februarySection" class="hidden-section">
+    <div class="max-w-2xl mx-auto bg-white p-2 rounded-3xl shadow-xl border-4 border-blue-50 relative">
+        <div class="flex justify-between items-center mb-2 px-4 pt-2">
+            <h3 class="text-xl font-bold text-blue-700">محاضرات شهر فبراير</h3>
+            <button onclick="goBack()" class="text-red-500 font-bold bg-red-50 px-3 py-1 rounded-full">X</button>
+        </div>
+       <iframe src="https://drive.google.com/file/d/1zXq6_UizAA0_muevDK1qOXa1_JObcZVu/preview" 
+class="w-full rounded-2xl" style="height:600px;" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
 
+<!-- April Section -->
+<div id="aprilSection" class="hidden-section">
+    <div class="max-w-2xl mx-auto bg-white p-2 rounded-3xl shadow-xl border-4 border-blue-50 relative">
+        <div class="flex justify-between items-center mb-2 px-4 pt-2">
+            <h3 class="text-xl font-bold text-blue-700">محاضرات شهر أبريل</h3>
+            <button onclick="goBack()" class="text-red-500 font-bold bg-red-50 px-3 py-1 rounded-full">X</button>
+        </div>
+        <iframe src="https://drive.google.com/file/d/1-scCrJjhl-r0TI2m9je8LBoYeIFFIbTS/preview" 
+class="w-full rounded-2xl" style="height:600px;" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+<div id="maySection" class="hidden-section">
+
+  <div class="max-w-2xl mx-auto bg-white p-2 rounded-3xl shadow-xl border-4 border-blue-50 relative">
+
+    <div class="flex justify-between items-center mb-2 px-4 pt-2">
+      <h3 id="txt-may-title" class="text-xl font-bold text-blue-700">
+        محاضرات شهر مايو
+      </h3>
+
+      <button onclick="goBack()" class="text-red-500 font-bold bg-red-50 px-3 py-1 rounded-full">
+        X
+      </button>
+    </div>
+
+    <iframe 
+      src="https://drive.google.com/file/d/1P85ZiRu9t3dBYASdSvshNiag2AtG9LwC/preview"
+      class="w-full rounded-2xl"
+      style="height:600px;"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+
+  </div>
+
+</div>
         <!-- Cabinets Section -->
         <div id="cabinetsSection" class="hidden-section text-center">
             <h2 id="txt-cab-head" class="text-3xl font-bold mb-10 text-[#C5A021]">دواليب الطوارئ</h2>
@@ -347,22 +603,77 @@ cursor-pointer hover:scale-110 shadow-lg">4</div>
     </footer>
 
     <script>
-        const translations = {
-            ar: {
-                siteTitle: "أكاديمية قسم الصيدلية - مستشفى المطرية التعليمي", siteSubtitle: "بوابة التعليم الطبي المستمر", langBtn: "English",
-                badge: "التميز في التعليم الصيدلي", heroT: "المنصة التعليمية لقسم الصيدلية", heroD: "المنصة الرقمية الموحدة للتدريب والتعليم المستمر لجميع الكوادر الطبية والصيادلة.",
-                cabinets: "دواليب الطوارئ", ams: "سياسة صرف المضادات", protocols: "البروتوكولات", lectures: "المحاضرات الشهرية", search: "ابحث عن بروتوكول أو دواء...",
-                amsHead: "Anti Microbial Stewardship", journey: "مستشفى المضادات والرحلة العظيمة", calc: "حاسبة الجرعات", watchEpisode: "مشاهدة الفيديو",
-                burn: "دولاب الحروق", erTitle: "دولاب الكوارث", erDesc: "قريباً: شرح تفصيلي لمحتويات دولاب الطوارئ", watchVideo: "مشاهدة الفيديو", download: "تحميل PDF", janTitle: "محاضرات شهر يناير", footer: "جميع الحقوق محفوظة © 2026"
-            },
-            en: {
-                siteTitle: "Pharmacy Dept Academy", siteSubtitle: "Medical Education Portal", langBtn: "العربية",
-                badge: "Pharmacy Excellence", heroT: "Learning Platform", heroD: "Unified digital platform for medical training.",
-                cabinets: "ER Cabinets", ams: "AMS Policy", protocols: "Protocols", lectures: "Lectures", search: "Search protocols...",
-                amsHead: "AMS Program", journey: "Antimicrobial Journey", calc: "Dose Calc", watchEpisode: "Watch Video",
-                burn: "Burns Cabinet", erTitle: "ER Cabinet", erDesc: "Coming Soon: Detailed contents", watchVideo: "Watch Video", download: "Download PDF", janTitle: "January Lectures", footer: "All Rights Reserved © 2026"
-            }
-        };
+   const translations = {
+  ar: {
+    siteTitle: "أكاديمية قسم الصيدلية - مستشفى المطرية التعليمي",
+    siteSubtitle: "بوابة التعليم الطبي المستمر",
+    langBtn: "English",
+
+    badge: "التميز في التعليم الصيدلي",
+    heroT: "المنصة التعليمية لقسم الصيدلية",
+    heroD: "المنصة الرقمية الموحدة للتدريب والتعليم المستمر لجميع الكوادر الطبية والصيادلة",
+
+    cabinets: "دواليب الطوارئ",
+    ams: "سياسة صرف المضادات",
+    protocols: "البروتوكولات",
+    lectures: "المحاضرات الشهرية",
+    search: "ابحث عن بروتوكول أو دواء...",
+
+    amsHead: "برنامج المضادات الحيوية",
+    journey: "مستشفى المضادات والرحلة العظيمة",
+    calc: "حاسبة الجرعات",
+    watchEpisode: "مشاهدة الفيديو",
+
+    burn: "دولاب الحروق",
+    erTitle: "دولاب الكوارث",
+    erDesc: "قريباً: شرح تفصيلي لمحتويات دولاب الطوارئ",
+    watchVideo: "مشاهدة الفيديو",
+
+    download: "تحميل PDF",
+    burnsDownload: "تحميل PDF",
+
+    janTitle: "محاضرات شهر يناير",
+mayTitle: "محاضرات شهر مايو",
+    footer: "جميع الحقوق محفوظة © 2026",
+
+    burnsTitle: "الحروق وجراحة التجميل"
+  },
+
+  en: {
+    siteTitle: "Pharmacy Dept Academy",
+    siteSubtitle: "Medical Education Portal",
+    langBtn: "العربية",
+
+    badge: "Pharmacy Excellence",
+    heroT: "Learning Platform",
+    heroD: "Unified digital platform for medical training.",
+
+    cabinets: "ER Cabinets",
+    ams: "AMS Policy",
+    protocols: "Protocols",
+    lectures: "Lectures",
+    search: "Search protocols...",
+
+    amsHead: "AMS Program",
+    journey: "Antimicrobial Journey",
+    calc: "Dose Calc",
+    watchEpisode: "Watch Video",
+
+    burn: "Burns Cabinet",
+    erTitle: "ER Cabinet",
+    erDesc: "Coming Soon",
+    watchVideo: "Watch Video",
+
+    download: "Download PDF",
+    burnsDownload: "Download PDF",
+
+    janTitle: "January Lectures",
+mayTitle: "May Lectures",
+    footer: "All Rights Reserved © 2026",
+
+    burnsTitle: "Burns & Plastic Surgery"
+  }
+};
 
         let currentLang = 'ar';
         let navigationHistory = ['homeSection'];
@@ -378,6 +689,9 @@ cursor-pointer hover:scale-110 shadow-lg">4</div>
         function showSection(id) {
             document.querySelectorAll('main > div').forEach(d => d.classList.add('hidden-section'));
             document.getElementById(id).classList.remove('hidden-section');
+if (id === 'lecturesSection') {
+  renderLectures();
+}
             document.getElementById('backBtn').classList.remove('hidden');
             navigationHistory.push(id);
             window.scrollTo(0,0);
@@ -422,8 +736,14 @@ cursor-pointer hover:scale-110 shadow-lg">4</div>
             document.getElementById('txt-vid-watch').innerText = t.watchEpisode;
             document.getElementById('txt-prot-head').innerText = t.protocols;
             document.getElementById('txt-download').innerText = t.download;
+document.querySelectorAll('.txt-burns-title')
+  .forEach(el => el.innerText = t.burnsTitle);
+
+document.querySelectorAll('.txt-burns-download')
+  .forEach(el => el.innerText = t.burnsDownload);
             document.getElementById('txt-lec-head').innerText = t.lectures;
             document.getElementById('txt-jan-title').innerText = t.janTitle;
+document.getElementById('txt-may-title').innerText = t.mayTitle;
             document.getElementById('txt-cab-head').innerText = t.cabinets;
             document.getElementById('txt-burn-title').innerText = t.burn;
             document.getElementById('txt-er-title').innerText = t.erTitle;
@@ -445,12 +765,32 @@ cursor-pointer hover:scale-110 shadow-lg">4</div>
         function renderLectures() {
             const grid = document.getElementById('lecturesGrid');
             grid.innerHTML = '';
-            const list = currentLang === 'ar' ? ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"] : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const list = currentLang === 'ar'
+  ? ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"]
+  : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
             list.forEach((m, i) => {
                 const div = document.createElement('div');
                 div.className = "bg-white p-4 rounded-2xl border border-gray-100 shadow-sm text-center card-hover";
-                div.onclick = () => (i === 0 ? showSection('januarySection') : alert(currentLang === 'ar' ? 'قريباً' : 'Soon'));
-                div.innerHTML = `<i class="fas fa-calendar-day text-blue-500 mb-2"></i><div class="font-bold text-sm">${m}</div>`;
+               const sectionMap = {
+  0: 'januarySection',
+  1: 'februarySection',
+  3: 'aprilSection',
+  4: 'maySection'
+};
+
+div.onclick = () => {
+  if (sectionMap[i]) {
+    showSection(sectionMap[i]);
+  } else {
+    alert(currentLang === 'ar' ? 'قريباً' : 'Soon');
+  }
+};
+               div.innerHTML = `
+  <i class="fas fa-calendar-day text-blue-500 mb-2"></i>
+  <div class="font-bold text-sm month-text"></div>
+`;
+
+div.querySelector('.month-text').innerText = m;
                 grid.appendChild(div);
             });
         }
@@ -488,6 +828,24 @@ cursor-pointer hover:scale-110 shadow-lg">4</div>
                     p: "pneumoniaSection",
                     k: "ampicillin sulbactam clarithromycin cefotaxime ceftriaxone moxifloxacin levofloxacin ceftazidime cefepime piperacillin tazobactam meropenem amikacin azithromycin vancomycin linezolid teicoplanin community"
                 }
+,{
+    t: "Burns & Plastic Surgery - Phalanges / Facial Fracture",
+    id: "burns-phal",
+    p: "burnsSection",
+    k: "cefazolin clindamycin ceftriaxone metronidazole levofloxacin vancomycin ampicillin sulbactam phalanges fracture hand facial mandibular"
+},
+{
+    t: "Burns & Plastic Surgery - Abrasion / Debridement / Necrotizing",
+    id: "burns-abras",
+    p: "burnsSection",
+    k: "amoxicillin clavulanate augmentin ceftriaxone vancomycin ciprofloxacin ceftazidime piperacillin tazobactam imipenem meropenem linezolid metronidazole clindamycin gentamicin abrasion debridement necrotizing fasciitis gangrene ulcer"
+},
+{
+    t: "Burns & Plastic Surgery - Burn Infections / SSI",
+    id: "burns-burn",
+    p: "burnsSection",
+    k: "cefazolin clindamycin levofloxacin ciprofloxacin piperacillin tazobactam amikacin meropenem imipenem vancomycin linezolid metronidazole silver sulfadiazine mupirocin fusidic burn skin graft surgical site infection"
+}
             ];
 
             const matches = data.filter(i => 
